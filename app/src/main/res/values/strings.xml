@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mediator</string>
+    <string name="grades_hint_text">Note</string>
+	<string name="thesis_hint_text">Teză</string>
+	<string name="grades_card_grades_hint_text">Note minime</string>
+	<string name="grades_card_average_hint_text">Media</string>
+    <string name="digit_1">1</string>
+    <string name="digit_2">2</string>
+    <string name="digit_3">3</string>
+    <string name="digit_4">4</string>
+    <string name="digit_5">5</string>
+    <string name="digit_6">6</string>
+    <string name="digit_7">7</string>
+    <string name="digit_8">8</string>
+    <string name="digit_9">9</string>
+    <string name="digit_10">10</string>
+    <string name="digit_remove">—</string>
+    <string name="digit_done">Gata</string>
+    <string name="enter_grades_hint">9, 8, 6, 9?</string>
+    <string name="average_text">Media:</string>
+    <string name="extra_grades_text">Note în plus:</string>
+	<string name="grades_card_over">Ai cel puțin</string>
+	<string name="grades_card_under">Iei sub</string>
+	<string name="extra_button_minus">-</string>
+	<string name="extra_button_plus">+</string>
+    <string name="menu_help">Ajutor</string>
+    <string name="help_dialog_title">Ajutor</string>
+    <string name="help_dialog_content">
+	    <b>Calculul mediei</b>\n
+	    \n
+	    Pentru a vă calcula media selectați întâi câmpul <i>Note</i>. O tastatură ce cuprinde toate notele de la 1 la 10 va apărea. Introduceți notele și apoi apăsați tasta <i>Gata</i>. Media va fi afișată.\n
+	    Folosiți tasta minus pentru a șterge o notă.\nObțional puteți introduce nota din teză după ce selectați câmpul respectiv.\n
+	    <u>Notă:</u> Pentru introducere/ștergere rapidă țineți apăsat butonul.\n
+	    \n
+	    <b>Note în plus</b>\n
+	    \n
+	    Aplicația poate de asemenea să determine notele necesare obținerii unei anumite medii. De exemplu avem notele 6, 7, 8, 8 cu media 7.25 adică 7 în catalog. Să zicem că mai putem lua o notă (pentru a ne corecta media). Însă ce notă ne va duce spre media 8?\n
+	    \n
+	    Aplicația ne poate spune acest lucru. Introducem notele deja existente (6,7,8,8) și apăsăm pe butonul + de lângă <i>Note în plus</i>. Un tabel va apărea cu informațiile necesare. Pentru media 8 avem scrisă sub <i>Note minime</i> nota 9. Deci nota minimă care ne va duce spre media 8 este 9. Tot din tabel aflăm că pentru a ne menține media 7 ne trebuie minim un 4.
+    </string>
+	<string name="help_dialog_button">Am înțeles</string>
+	<string name="menu_about">Despre</string>
+	<string name="about_dialog_title">Despre</string>
+	<string name="about_dialog_content">
+		<b>Mediator</b> versiunea <b>1.0.0</b>\n
+		\n
+		Creat de Neacșu Răzvan\n
+		\n
+		Email:\n
+		<i>razvan.neacsu5@gmail.com</i>
+	</string>
+	<string name="about_dialog_button">OK</string>
+
+</resources>
