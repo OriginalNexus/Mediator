@@ -7,37 +7,34 @@
 	left: 0px;
 	right: 0px;
 	height: 100px;
-	text-align: left;
+	min-width: 600px;
 	line-height: 100px;
-	font-size: 50px;
+	font-size: 100%;
 	background-color: white;
 	padding-left: 50px;
-	padding-right: 50px;
 	box-shadow: 0px 4px 7px rgb(170,170,170);
 	transition: all 0.5s ease;
 }
 
-.header a {
-	color: inherit;
-	text-decoration: inherit;
+.header .title {
+	font-size: 300%;
 }
 
-.header .subtitle {
-	font-size: 17px;
+.header .title .subtitle {
+	font-size: 40%;
 	font-style: italic;
-	margin-left: 0px;
-	transition: font-size 0.5s ease;
+}
+
+.header a {
+	color: black;
+	text-decoration: normal;
 }
 
 .header.small {
-	background-color: rgb(230,230,255);
+	background-color: rgb(240,240,240);
 	height: 60px;
 	line-height: 60px;
-	font-size: 30px;
-}
-
-.header.small .subtitle{
-	font-size: 10px;
+	font-size: 60%;
 }
 
 .content {
