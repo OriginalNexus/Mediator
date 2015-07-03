@@ -119,4 +119,7 @@ proguard/
 # Log Files
 *.log
 
+# Excludes
+
+!/download/*
 
