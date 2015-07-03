@@ -3,7 +3,7 @@ Mediator
 
 *te scapă de calculator!*
 
-![Mediator Main Image](https://drive.google.com/uc?export=download&id=0B5YoJ1GXs2MAU3NzUTNYQUpXSXc)
+![Mediator Image](http://originalnexus.github.io/Mediator/images/app_main_view.png)
 
 ## Descriere:
 
@@ -26,7 +26,9 @@ Deasemenea am folosit și [Android Asset Studio](https://romannurik.github.io/An
 
 ## Download
 
-Link către aplicație: [https://goo.gl/FAYXRJ](https://goo.gl/FAYXRJ). Momentan nu este disponibilă pe Google Play.
+[Mediator v1.0.0](http://originalnexus.github.io/Mediator/download/Mediator_v1.0.0.apk)
+
+Momentan aplicația nu este disponibilă pe Google Play.
 
 ## Realizator:
 
