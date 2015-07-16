@@ -22,7 +22,7 @@ Această funcție poate fi folosită și de profesori pentru a îndrepta mediile
 ## Programe folosite:
 
 Aplicația a fost creată folosind [Android Studio](http://developer.android.com/sdk/index.html) (împreună cu SDK-ul pentru Android și alte plugin-uri pentru platforma IntelliJ).
-Deasemenea am folosit și [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/index.html) pentru a crea iconița aplicației
+De asemenea am folosit și [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/index.html) pentru a crea iconița aplicației
 
 ## Download
 

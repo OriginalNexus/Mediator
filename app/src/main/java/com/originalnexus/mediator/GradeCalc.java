@@ -1,6 +1,6 @@
-package org.example.mediator;
+package com.originalnexus.mediator;
 
-public class GradeCalc {
+class GradeCalc {
 
 	private static final double thesisPercent = 0.25;
 	private static final int numOfDecimals = 2;

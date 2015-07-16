@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<color name="card_background_light">#ffe6e6e6</color>
+	<color name="card_border_light">#ff464646</color>
+
+	<color name="card_background_dark">#ff373737</color>
+	<color name="card_border_dark">#ffb9b9b9</color>
+
+
+	<color name="keypad_top_light">#ffebebeb</color>
+	<color name="keypad_bottom_light">#ffe1e1e1</color>
+	<color name="keypad_border_light">#ff373737</color>
+
+	<color name="keypad_pressed_top_light">#ffe1e1e1</color>
+	<color name="keypad_pressed_bottom_light">#ffd7d7d7</color>
+	<color name="keypad_pressed_border_light">#ff373737</color>
+
+	<color name="keypad_top_dark">#ff3c3c3c</color>
+	<color name="keypad_bottom_dark">#ff323232</color>
+	<color name="keypad_border_dark">#ffb9b9b9</color>
+
+	<color name="keypad_pressed_top_dark">#ff464646</color>
+	<color name="keypad_pressed_bottom_dark">#ff3c3c3c</color>
+	<color name="keypad_pressed_border_dark">#ffb9b9b9</color>
+
+
+	<color name="colorPrimary">#ff2578ec</color>
+	<color name="colorPrimaryDark">#ff1056b2</color>
+
+	<color name="text_light">#101010</color>
+	<color name="text_dark">#efefef</color>
+
+	<color name="drawer_header_text_background_light">#ccffffff</color>
+	<color name="drawer_header_text_background_dark">#cc373737</color>
+
+
+	<color name="grades_card_over_light">#ff007d00</color>
+	<color name="grades_card_over_dark">#ff00eb00</color>
+
+	<color name="grades_card_under_light">#ff9b0000</color>
+	<color name="grades_card_under_dark">#ffff0000</color>
+
+</resources>

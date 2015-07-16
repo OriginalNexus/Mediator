@@ -1,0 +1,16 @@
+v1.1.0
+	* HUGE CHANGES
+	+ Implemented Android Support Libraries
+	* Application is now available for Android 2.2 and above
+	+ Added navigation drawer
+	+ Materialised whole app
+	+ Added Settings
+	+ Added Black theme (change from settings)
+	+ Added this changelog
+	* Updated colors and UI
+	* Updated About dialog
+	* Bugs fixed
+	* Some other things I forgot to mention
+
+v1.0.0
+	* First version, includes basic app

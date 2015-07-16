@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<attr name="keypad_btn_background" format="reference" />
+	<attr name="container_card_background" format="reference" />
+	<attr name="action_bar_theme" format="reference" />
+	<attr name="drawer_header_text_background" format="color" />
+	<attr name="grades_card_over" format="color" />
+	<attr name="grades_card_under" format="color" />
+</resources>

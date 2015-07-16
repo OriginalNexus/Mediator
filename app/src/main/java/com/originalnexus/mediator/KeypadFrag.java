@@ -1,22 +1,27 @@
-package org.example.mediator;
+package com.originalnexus.mediator;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.EventObject;
 
+/**
+ * Provides a simple keypad for the user to type grades faster.
+ * Fragment MUST be placed inside a LinearLayout, or else crash
+ */
 public class KeypadFrag extends Fragment {
 	/**
 	 * Animation length in ms
@@ -29,11 +34,11 @@ public class KeypadFrag extends Fragment {
 	/**
 	 * State of the keyboard (hidden hidden by default)
 	 */
-	private boolean isHidden = true;
+	public boolean isHidden = true;
 	/**
 	 * View that contains the keyboard
 	 */
-	private View kView;
+	private LinearLayout kView;
 	/**
 	 * Keypad measured height in px
 	 */
@@ -50,7 +55,7 @@ public class KeypadFrag extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		kView = inflater.inflate(R.layout.keypad, container, false);
+		kView = (LinearLayout) inflater.inflate(R.layout.keypad, container, false);
 		return kView;
 	}
 
@@ -64,8 +69,8 @@ public class KeypadFrag extends Fragment {
 			@Override
 			public boolean onPreDraw() {
 				// After the view is ready to be shown we can get it's exact sizes and then hide it
-				for (int i = 0; i < ((LinearLayout) kView).getChildCount(); i++) {
-					View child = ((LinearLayout) kView).getChildAt(i);
+				for (int i = 0; i < kView.getChildCount(); i++) {
+					View child = kView.getChildAt(i);
 					// Makes the buttons keep their size
 					child.setLayoutParams(new LinearLayout.LayoutParams(child.getWidth(), child.getHeight(), 0));
 				}
@@ -74,8 +79,18 @@ public class KeypadFrag extends Fragment {
 				// Exact size
 				kHeight = kView.getHeight();
 				// Hide the keypad
-				kView.getLayoutParams().height = 0;
-				((LayoutParams)kView.getLayoutParams()).weight = 0;
+				setHeight(0);
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+					((LinearLayout.LayoutParams) kView.getLayoutParams()).weight = 0;
+				}
+				else {
+					/**
+					 * On android api level < 11 the support library adds an extra view to the
+					 * view hierarchy: NoSaveStateFrameLayout which extends FrameLayout
+					 * Therefore we need to acces the parent of our view.
+					 */
+					((LinearLayout.LayoutParams) ((View) kView.getParent()).getLayoutParams()).weight = 0;
+				}
 				return false;
 			}
 		});
@@ -84,7 +99,7 @@ public class KeypadFrag extends Fragment {
 		hideAnim = new Animation() {
 			@Override
 			protected void applyTransformation(float interpolatedTime, Transformation t) {
-				kView.getLayoutParams().height = (int)(kHeight * (1 - interpolatedTime));
+				setHeight((int) (kHeight * (1 - interpolatedTime)));
 				kView.requestLayout();
 			}
 
@@ -103,7 +118,7 @@ public class KeypadFrag extends Fragment {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				kView.setVisibility(View.GONE);
+				hide();
 			}
 
 			@Override
@@ -115,7 +130,7 @@ public class KeypadFrag extends Fragment {
 		showAnim = new Animation() {
 			@Override
 			protected void applyTransformation(float interpolatedTime, Transformation t) {
-				kView.getLayoutParams().height = (int) (kHeight * interpolatedTime);
+				setHeight((int) (kHeight * interpolatedTime));
 				kView.requestLayout();
 			}
 
@@ -134,7 +149,7 @@ public class KeypadFrag extends Fragment {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				kView.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
+				show();
 			}
 
 			@Override
@@ -143,16 +158,22 @@ public class KeypadFrag extends Fragment {
 			}
 		});
 
+		// For some reason animations do not work on api level < 11 so disable them
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			showAnim = null;
+			hideAnim = null;
+		}
+
 		// All the buttons in specific order
-		String buttonIds[] = {
-				"digit_1", "digit_2", "digit_3",
-				"digit_4", "digit_5", "digit_6",
-				"digit_7", "digit_8", "digit_9",
-				"digit_10", "digit_minus", "digit_done"};
+		int[] buttonIds = {
+				R.id.digit_1, R.id.digit_2, R.id.digit_3,
+				R.id.digit_4, R.id.digit_5, R.id.digit_6,
+				R.id.digit_7, R.id.digit_8, R.id.digit_9,
+				R.id.digit_10, R.id.digit_minus, R.id.digit_done};
 
 		for (int i = 0; i < 12; i++) {
 			// Find button view
-			View btnView = kView.findViewById(getActivity().getResources().getIdentifier(buttonIds[i], "id", getActivity().getPackageName()));
+			View btnView = kView.findViewById(buttonIds[i]);
 			if (btnView != null) {
 				// Type of the button
 				KeypadBtnType btnType;
@@ -166,7 +187,7 @@ public class KeypadFrag extends Fragment {
 				}
 
 				// Create keypad events
-				final KeypadEvent e = new KeypadEvent(this, btnType, digit);
+				final KeypadEvent e = new KeypadEvent(this, btnView, btnType, digit);
 				btnView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -192,12 +213,14 @@ public class KeypadFrag extends Fragment {
 	}
 
 	/**
-	 * Bind a key press event listener
-	 * @param listener The listener to be notified
-	 */
-	public void addKeypadListener(KeypadListener listener) {
-		if (!keypadListenerList.contains(listener)) {
-			keypadListenerList.add(listener);
+	 * Get actual parent
+ 	 */
+	private ViewParent getParent() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			return kView.getParent();
+		}
+		else {
+			return kView.getParent().getParent();
 		}
 	}
 
@@ -213,9 +236,9 @@ public class KeypadFrag extends Fragment {
 		// Set isHidden property based on the switch
 
 		if (sw == 0) isHidden = true;
-		else //noinspection SimplifiableIfStatement,SimplifiableIfStatement,SimplifiableIfStatement,SimplifiableIfStatement
+		else //noinspection SimplifiableIfStatement
 			if (sw == 1) isHidden = false;
-		else isHidden = !isHidden;
+			else isHidden = !isHidden;
 
 		// If the keypad needs to be hid
 		if (isHidden && kView.getVisibility() == View.VISIBLE) {
@@ -225,7 +248,7 @@ public class KeypadFrag extends Fragment {
 			}
 			else {
 				// Hide the view
-				kView.setVisibility(View.GONE);
+				hide();
 			}
 		}
 
@@ -233,19 +256,69 @@ public class KeypadFrag extends Fragment {
 		else if (!isHidden && kView.getVisibility() != View.VISIBLE) {
 			if (showAnim != null) {
 				// Start animation
+				((View)getParent()).invalidate();
 				kView.startAnimation(showAnim);
 			}
 			else {
 				// Show the view
-				kView.setVisibility(View.VISIBLE);
+				show();
+				getParent().requestLayout();
 			}
+		}
+	}
+
+	/**
+	 * Shows the keypad immediately
+	 */
+	private void show() {
+		setHeight(kHeight);
+		kView.setVisibility(View.VISIBLE);
+	}
+
+	/**
+	 * Hides the keypad immediately
+	 */
+	private void hide() {
+		setHeight(0);
+		kView.setVisibility(View.GONE);
+	}
+
+	/**
+	 * Sets keypad height
+	 *
+	 * @param height The new height in pixels or using one of the constants:
+	 *               LinearLayout.LayoutParams.WRAP_CONTENT
+	 *               LinearLayout.LayoutParams.MATCH_PARENT
+	 */
+	private void setHeight(int height) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			kView.getLayoutParams().height = height;
+		}
+		else {
+			/**
+			 * On android api level < 11 the support library adds an extra view to the
+			 * view hierarchy: NoSaveStateFrameLayout which extends FrameLayout
+			 * Therefore we need to acces the parent of our view.
+			 */
+			((View) kView.getParent()).getLayoutParams().height = height;
+		}
+	}
+
+	/**
+	 * Bind a key press event listener
+	 *
+	 * @param listener The listener to be notified
+	 */
+	public void addKeypadListener(KeypadListener listener) {
+		if (!keypadListenerList.contains(listener)) {
+			keypadListenerList.add(listener);
 		}
 	}
 
 	/**
 	 * The type of the pressed button
 	 */
-	public enum KeypadBtnType{
+	public enum KeypadBtnType {
 		DIGIT,
 		REMOVE,
 		DONE
@@ -256,6 +329,7 @@ public class KeypadFrag extends Fragment {
 	 */
 	public interface KeypadListener extends EventListener {
 		void keyPressed(KeypadEvent e);
+
 		void keyLongPressed(KeypadEvent e);
 	}
 
@@ -264,20 +338,24 @@ public class KeypadFrag extends Fragment {
 	 */
 	public class KeypadEvent extends EventObject {
 		public final KeypadBtnType btnType;
+		public final View sender;
 		public int digit = 0;
 
 		/**
 		 * Constructor of the event
-		 * @param source Source object
+		 *
+		 * @param source  Source object
+		 * @param sender  The view that was clicked
 		 * @param btnType The type of the pressed button
-		 * @param digit The pressed digit or 0 if not available
+		 * @param digit   The pressed digit or 0 if not available
 		 */
-		public KeypadEvent(Object source, KeypadBtnType btnType, int digit) {
+		public KeypadEvent(Object source, View sender, KeypadBtnType btnType, int digit) {
 			super(source);
 			this.btnType = btnType;
 			this.digit = digit;
+			this.sender = sender;
 
 		}
-	}
 
+	}
 }

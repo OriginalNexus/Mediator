@@ -4,8 +4,8 @@ android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
     defaultConfig {
-        applicationId 'com.example.mediator'
-        minSdkVersion 14
+        applicationId 'com.originalnexus.mediator'
+        minSdkVersion 8
         targetSdkVersion 22
     }
     buildTypes {
@@ -20,4 +20,6 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:design:22.2.0'
 }

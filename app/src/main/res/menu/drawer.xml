@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<group
+		android:checkableBehavior="single"
+		android:enabled="true">
+
+		<item
+			android:id="@+id/drawer_item_mediator"
+			android:checked="false"
+			android:title="@string/drawer_item_mediator"/>
+		<item
+			android:id="@+id/drawer_item_report_card"
+			android:checked="false"
+			android:title="@string/drawer_item_report_card"/>
+		<item
+			android:id="@+id/drawer_item_settings"
+		    android:title="@string/drawer_item_settings" />
+		<item
+			android:id="@+id/drawer_item_help"
+			android:title="@string/drawer_item_help" />
+		<item
+			android:id="@+id/drawer_item_about"
+			android:title="@string/drawer_item_about" />
+	</group>
+</menu>

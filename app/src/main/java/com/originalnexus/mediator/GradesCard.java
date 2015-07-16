@@ -1,8 +1,8 @@
-package org.example.mediator;
+package com.originalnexus.mediator;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +25,13 @@ public class GradesCard extends Fragment {
 
 	/**
 	 * Creates a new instance of the fragment and sets some options
-	 * @param startHidden Whether to start the fragment hidden
-	 * @param hideIfInvalid Whether to hide the fragment if anything is incorrect
 	 * @return The new fragment
 	 */
-	public static GradesCard newInstance(boolean startHidden, boolean hideIfInvalid) {
+	public static GradesCard newInstance() {
 		GradesCard fragment = new GradesCard();
 		Bundle args = new Bundle();
-		args.putBoolean(ARG_START_HIDDEN, startHidden);
-		args.putBoolean(ARG_HIDE_IF_INVALID, hideIfInvalid);
+		args.putBoolean(ARG_START_HIDDEN, true);
+		args.putBoolean(ARG_HIDE_IF_INVALID, true);
 		fragment.setArguments(args);
 		return fragment;
 	}

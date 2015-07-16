@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:baselineAligned="false"
     android:orientation="vertical"
-	tools:context="org.example.mediator.GradesCard"
+	tools:context="com.originalnexus.mediator.GradesCard"
 	>
 
 

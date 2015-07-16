@@ -1,20 +1,63 @@
 <resources>
 
-	<style name="AppTheme" parent="android:Theme.DeviceDefault.Light">
-		<item name="android:textColor">#101010</item>
+	<style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+		<item name="android:textColor">@color/text_light</item>
+		<item name="keypad_btn_background">@drawable/keypad_btn_light</item>
+		<item name="container_card_background">@drawable/container_card_light</item>
+		<item name="action_bar_theme">@style/ActionBar.Light</item>
+		<item name="drawer_header_text_background">@color/drawer_header_text_background_light</item>
+		<item name="grades_card_over">@color/grades_card_over_light</item>
+		<item name="grades_card_under">@color/grades_card_under_light</item>
+
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
 	</style>
 
+
+	
+	<style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
+		<item name="android:textColor">@color/text_dark</item>
+		<item name="keypad_btn_background">@drawable/keypad_btn_dark</item>
+		<item name="container_card_background">@drawable/container_card_dark</item>
+		<item name="action_bar_theme">@style/ActionBar</item>
+		<item name="drawer_header_text_background">@color/drawer_header_text_background_dark</item>
+		<item name="grades_card_over">@color/grades_card_over_dark</item>
+		<item name="grades_card_under">@color/grades_card_under_dark</item>
+
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+	</style>
+
+
+	
+	<style name="ActionBar" parent="ThemeOverlay.AppCompat.Dark">
+		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+	</style>
+
+	<style name="ActionBar.Light" parent="ThemeOverlay.AppCompat.Dark">
+		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+	</style>
+	
 	<style name="KeypadBtn" parent="android:Widget.TextView">
 		<item name="android:layout_width">0dp</item>
 		<item name="android:layout_height">match_parent</item>
 		<item name="android:layout_gravity">center</item>
 		<item name="android:layout_margin">4dp</item>
 		<item name="android:layout_weight">1</item>
-		<item name="android:background">@drawable/keypad_btn</item>
+		<item name="android:background">?attr/keypad_btn_background</item>
+		<item name="android:gravity">center</item>
 		<item name="android:textSize">23sp</item>
 	</style>
 
-	<style name="InputField" parent="android:Widget.EditText">
+	<style name="NormalBtn" parent="android:Widget.TextView">
+		<item name="android:background">?attr/keypad_btn_background</item>
+		<item name="android:gravity">center</item>
+		<item name="android:clickable">true</item>
+	</style>
+
+	<style name="InputField">
+		<item name="android:background">?attr/editTextBackground</item>
 		<item name="android:gravity">center</item>
 		<item name="android:clickable">true</item>
 		<item name="android:focusable">true</item>
@@ -24,15 +67,15 @@
 	<style name="GradesCard" parent="android:Widget.TextView" />
 
 	<style name="GradesCard.Over">
-		<item name="android:textColor">#ff1c842b</item>
+		<item name="android:textColor">?attr/grades_card_over</item>
 	</style>
 
 	<style name="GradesCard.Middle">
-		<item name="android:textColor">#ff000000</item>
+
 	</style>
 
 	<style name="GradesCard.Under">
-		<item name="android:textColor">#ffa82224</item>
+		<item name="android:textColor">?attr/grades_card_under</item>
 	</style>
 
 </resources>

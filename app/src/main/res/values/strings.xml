@@ -15,23 +15,25 @@
     <string name="digit_7">7</string>
     <string name="digit_8">8</string>
     <string name="digit_9">9</string>
-    <string name="digit_10">10</string>
-    <string name="digit_remove">—</string>
-    <string name="digit_done">Gata</string>
-    <string name="enter_grades_hint">9, 8, 6, 9?</string>
-    <string name="average_text">Media:</string>
-    <string name="extra_grades_text">Note în plus:</string>
+	<string name="digit_10">10</string>
+	<string name="digit_remove">—</string>
+	<string name="digit_done">Gata</string>
+	<string name="enter_grades_hint">9, 8, 6, 9?</string>
+	<string name="average_text">Media:</string>
+	<string name="extra_grades_text">Note în plus:</string>
 	<string name="grades_card_over">Ai cel puțin</string>
 	<string name="grades_card_under">Iei sub</string>
 	<string name="extra_button_minus">-</string>
 	<string name="extra_button_plus">+</string>
-    <string name="menu_help">Ajutor</string>
-    <string name="help_dialog_title">Ajutor</string>
+	<string name="menu_help">Ajutor</string>
+	<string name="menu_settings">Preferințe</string>
+	<string name="menu_about">Despre</string>
+	<string name="help_dialog_title">Ajutor</string>
     <string name="help_dialog_content">
 	    <b>Calculul mediei</b>\n
 	    \n
 	    Pentru a vă calcula media selectați întâi câmpul <i>Note</i>. O tastatură ce cuprinde toate notele de la 1 la 10 va apărea. Introduceți notele și apoi apăsați tasta <i>Gata</i>. Media va fi afișată.\n
-	    Folosiți tasta minus pentru a șterge o notă.\nObțional puteți introduce nota din teză după ce selectați câmpul respectiv.\n
+	    Folosiți tasta minus pentru a șterge o notă.\nOpțional puteți introduce nota din teză după ce selectați câmpul respectiv.\n
 	    <u>Notă:</u> Pentru introducere/ștergere rapidă țineți apăsat butonul.\n
 	    \n
 	    <b>Note în plus</b>\n
@@ -41,16 +43,48 @@
 	    Aplicația ne poate spune acest lucru. Introducem notele deja existente (6,7,8,8) și apăsăm pe butonul + de lângă <i>Note în plus</i>. Un tabel va apărea cu informațiile necesare. Pentru media 8 avem scrisă sub <i>Note minime</i> nota 9. Deci nota minimă care ne va duce spre media 8 este 9. Tot din tabel aflăm că pentru a ne menține media 7 ne trebuie minim un 4.
     </string>
 	<string name="help_dialog_button">Am înțeles</string>
-	<string name="menu_about">Despre</string>
 	<string name="about_dialog_title">Despre</string>
 	<string name="about_dialog_content">
-		<b>Mediator</b> versiunea <b>1.0.0</b>\n
-		\n
-		Creat de Neacșu Răzvan\n
-		\n
-		Email:\n
-		<i>razvan.neacsu5@gmail.com</i>
+		&lt;h1&gt;Mediator {version}&lt;/h1&gt;
+		&lt;p&gt;
+			&lt;a href="http://originalnexus.github.io/Mediator/"&gt;Site oficial&lt;/a&gt;
+		&lt;/p&gt;
+		&lt;p&gt;
+			&lt;a href="https://plus.google.com/103442886155774241507/"&gt;Google+&lt;/a&gt;
+		&lt;/p&gt;
+		&lt;p&gt;
+			&lt;a href="https://github.com/OriginalNexus/Mediator/"&gt;Github&lt;/a&gt;
+		&lt;/p&gt;
+
+		&lt;h1&gt;Creat de Neacșu Răzvan&lt;/h1&gt;
+		&lt;p&gt;
+			Email: &lt;a href="mailto:razvan.neacsu5@gmail.com"&gt;&lt;i&gt;razvan.neacsu5@gmail.com&lt;/i&gt;&lt;/a&gt;
+		&lt;/p&gt;
+		&lt;p&gt;
+			&lt;a href="https://www.facebook.com/neacsu.razvan.75"&gt;Facebook&lt;/a&gt;
+		&lt;/p&gt;
+		&lt;p&gt;
+			&lt;a href="https://plus.google.com/114989395056130155654/"&gt;Google+&lt;/a&gt;
+		&lt;/p&gt;
+		&lt;p&gt;
+			&lt;a href="https://github.com/OriginalNexus/"&gt;Github&lt;/a&gt;
+		&lt;/p&gt;
 	</string>
 	<string name="about_dialog_button">OK</string>
+	<string name="pref_theme_title">Culoare interfață</string>
+	<string name="pref_theme_default_value">light</string>
+	<string name="pref_title">Preferințe</string>
+	<string name="pref_theme_summary_light">Alb</string>
+	<string name="pref_theme_summary_dark">Negru</string>
+	<string name="drawer_open">Drawer Open</string>
+	<string name="drawer_close">Drawer Close</string>
+	<string name="drawer_header_title">Mediator</string>
+	<string name="drawer_header_subtitle">te scapă de calculator</string>
+	<string name="drawer_header_image_description">Mediator Image</string>
+	<string name="drawer_item_mediator">Mediator</string>
+	<string name="drawer_item_report_card">Carnet de note</string>
+	<string name="drawer_item_settings">Setări</string>
+	<string name="drawer_item_about">Despre</string>
+	<string name="drawer_item_help">Ajutor</string>
 
 </resources>

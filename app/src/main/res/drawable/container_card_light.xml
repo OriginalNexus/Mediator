@@ -3,13 +3,13 @@
 	<item>
 		<shape android:shape="rectangle">
 			<corners android:radius="5dp"/>
-			<solid android:color="#555555"/>
+			<solid android:color="@color/card_border_light"/>
 		</shape>
 	</item>
 	<item android:bottom="1dp" android:left="0.5dp" android:right="0.5dp" android:top="0.5dp">
 		<shape android:shape="rectangle">
 			<corners android:radius="4.5dp"/>
-			<solid android:color="#FFFFFF"/>
+			<solid android:color="@color/card_background_light"/>
 		</shape>
 	</item>
 </layer-list>
