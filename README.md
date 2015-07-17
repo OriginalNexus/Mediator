@@ -26,7 +26,7 @@ De asemenea am folosit și [Android Asset Studio](https://romannurik.github.io/A
 
 ## Download
 
-[Mediator](http://originalnexus.github.io/Mediator/download.index)
+[Mediator](http://originalnexus.github.io/Mediator/download.html)
 
 Momentan aplicația nu este disponibilă pe Google Play.
 
