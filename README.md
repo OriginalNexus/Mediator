@@ -26,7 +26,7 @@ De asemenea am folosit și [Android Asset Studio](https://romannurik.github.io/A
 
 ## Download
 
-[Mediator v1.0.0](http://originalnexus.github.io/Mediator/download/Mediator_v1.0.0.apk)
+[Mediator](http://originalnexus.github.io/Mediator/download.index)
 
 Momentan aplicația nu este disponibilă pe Google Play.
 
