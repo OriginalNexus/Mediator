@@ -1,28 +1,18 @@
 package com.originalnexus.mediator;
 
+import java.util.ArrayList;
+
 class GradeCalc {
 
 	private static final double thesisPercent = 0.25;
 	private static final int numOfDecimals = 2;
 
 	/**
-	 * Calculates the average of the grades
-	 * @param grades Array containing the grades
-	 * @return The average with numOfDecimals decimals after the period
-	 */
-	public static double average(int[] grades) {
-		if (grades == null) return 0;
-		if (grades.length == 0) return 0;
-		double avg = sum(grades) / (double) grades.length;
-		return floorDecimals(avg);
-	}
-
-	/**
 	 * Calculates the sum of the given numbers
 	 * @param numbers Array containing the numbers
 	 * @return Sum of the numbers
 	 */
-	private static int sum(int[] numbers) {
+	private static int sum(ArrayList<Integer> numbers) {
 		if (numbers == null) return 0;
 		int s = 0;
 		for (int num : numbers) {
@@ -32,12 +22,26 @@ class GradeCalc {
 	}
 
 	/**
+	 * Calculates the average of the grades
+	 * @param grades Array containing the grades
+	 * @return The average with numOfDecimals decimals after the period
+	 */
+	@SuppressWarnings("WeakerAccess")
+	public static double average(ArrayList<Integer> grades) {
+		if (grades == null) return 0;
+		if (grades.size() == 0) return 0;
+		double avg = sum(grades) / (double) grades.size();
+		return floorDecimals(avg);
+	}
+
+	/**
 	 * Calculates the average with the thesis
 	 * @param grades Array containing the grades
 	 * @param thesis Thesis thesis
 	 * @return The average with numOfDecimals decimals after the period
 	 */
-	public static double averageWithThesis(int[] grades, int thesis) {
+	public static double average(ArrayList<Integer> grades, int thesis) {
+		if (thesis == 0) return average(grades);
 		return floorDecimals(average(grades) * (1 - thesisPercent) + thesis * thesisPercent);
 	}
 
@@ -52,8 +56,10 @@ class GradeCalc {
 	 * If finalAverage is achieved with the lowest possible grades (1, 1, 1, ...) then the first element will be 11
 	 * If anything is invalid, the first element will be -1
 	 */
-	public static int[] calculateRequiredGrades(int[] grades, int thesis, int numOfGrades, int finalAverage) {
-		int[] error = {-1};
+	public static ArrayList<Integer> calculateRequiredGrades(ArrayList<Integer> grades, int thesis, int numOfGrades, int finalAverage) {
+		ArrayList<Integer> error = new ArrayList<>(1);
+		error.add(-1);
+
 		if (numOfGrades <= 0) return error;
 		if (finalAverage < 1 || finalAverage > 10) return error;
 
@@ -65,7 +71,7 @@ class GradeCalc {
 			s = finalAverage - 0.5;
 		s = Math.ceil(s * Math.pow(10, numOfDecimals)) / Math.pow(10, numOfDecimals);
 		if (grades != null) {
-			s *= grades.length + numOfGrades;
+			s *= grades.size() + numOfGrades;
 			s = Math.ceil(s);
 			for (int grade : grades) {
 				s -= grade;
@@ -76,13 +82,20 @@ class GradeCalc {
 			s = Math.ceil(s);
 		}
 
-		if (s <= numOfGrades) return new int[] {11};
-		if (s > numOfGrades * 10) return new int[] {0};
+		ArrayList<Integer> output = new ArrayList<>(1);
 
-		int[] output = new int[numOfGrades];
-		for (int i = 0; i < numOfGrades; i++) {
-			output[i] = (int) Math.ceil(s / (double)(numOfGrades - i));
-			s -= output[i];
+		if (s <= numOfGrades) {
+			output.add(11);
+		}
+		else if (s > numOfGrades * 10) {
+			output.add(0);
+		}
+		else {
+			output.ensureCapacity(numOfGrades);
+			for (int i = 0; i < numOfGrades; i++) {
+				output.add((int) Math.ceil(s / (double) (numOfGrades - i)));
+				s -= output.get(i);
+			}
 		}
 
 		return output;
@@ -94,5 +107,19 @@ class GradeCalc {
 	 */
 	private static double floorDecimals(double d) {
 		return Math.floor(d * Math.pow(10, numOfDecimals)) / Math.pow(10, numOfDecimals);
+	}
+
+	/**
+	 * Transforms the given ArrayList into a string, each element separated by ", "
+	 * @param a The ArrayList to transform
+	 * @return The string
+	 */
+	public static String arrayListToString(ArrayList<Integer> a) {
+		String out = "";
+		for(int i = 0; i < a.size(); i++) {
+			out += a.get(i);
+			if (i < a.size() - 1) out += ", ";
+		}
+		return out;
 	}
 }

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<ScrollView
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:animateLayoutChanges="true"
+	    android:layout_weight="1"
+	    tools:ignore="UnusedAttribute">
+
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:animateLayoutChanges="true"
+	        android:orientation="vertical"
+	        android:padding="16dp">
+
+	        <LinearLayout
+	            android:id="@+id/grades_thesis_group"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:background="?attr/container_card_background"
+	            android:baselineAligned="false"
+	            android:orientation="horizontal"
+	            android:padding="8dp">
+
+	            <LinearLayout
+	                android:id="@+id/grades_container"
+	                android:layout_width="0dp"
+	                android:layout_height="match_parent"
+	                android:layout_weight="1"
+	                android:orientation="vertical">
+
+	                <TextView
+	                    android:layout_width="match_parent"
+	                    android:layout_height="wrap_content"
+	                    android:gravity="center"
+	                    android:text="@string/grades_hint_text"
+	                    android:textSize="25sp"/>
+
+	                <TextView
+	                    android:id="@+id/grades_input_field"
+	                    style="@style/InputField"
+	                    android:layout_width="match_parent"
+	                    android:layout_height="match_parent"
+	                    android:hint="@string/enter_grades_hint"
+	                    android:textSize="22sp"/>
+	            </LinearLayout>
+
+	            <LinearLayout
+	                android:layout_width="0.5dp"
+	                android:layout_height="match_parent"
+	                android:layout_marginLeft="4dp"
+	                android:layout_marginRight="4dp"
+	                android:background="#ff6d6d6d"
+	                android:orientation="horizontal">
+	            </LinearLayout>
+
+	            <LinearLayout
+	                android:id="@+id/thesis_container"
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	                android:minWidth="96dp"
+	                android:orientation="vertical">
+
+	                <TextView
+	                    android:layout_width="match_parent"
+	                    android:layout_height="wrap_content"
+	                    android:gravity="center"
+	                    android:text="@string/thesis_hint_text"
+	                    android:textSize="25sp"
+	                    />
+
+	                <TextView
+	                    android:id="@+id/thesis_input_field"
+	                    style="@style/InputField"
+	                    android:layout_width="match_parent"
+	                    android:layout_height="match_parent"
+	                    android:textSize="22sp"
+	                    />
+	            </LinearLayout>
+
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/average_container"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="8dp"
+	            android:background="?attr/container_card_background"
+	            android:minHeight="75dp"
+	            android:orientation="horizontal"
+	            android:padding="8dp">
+
+	            <TextView
+	                android:layout_width="0dp"
+	                android:layout_height="match_parent"
+	                android:layout_weight="1"
+	                android:gravity="left|center_vertical"
+	                android:text="@string/average_text"
+	                android:textSize="25sp"
+	                />
+
+	            <TextView
+	                android:id="@+id/average_text_view"
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	                android:layout_marginLeft="8dp"
+	                android:gravity="center_vertical|right"
+	                android:textSize="36sp"/>
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/extra_grades_container"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="32dp"
+	            android:minHeight="45dp"
+	            android:orientation="horizontal">
+
+	            <TextView
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center_vertical"
+	                android:layout_weight="3"
+	                android:gravity="center_vertical"
+	                android:text="@string/extra_grades_text"
+	                android:textSize="22sp"/>
+
+	            <TextView
+	                android:id="@+id/extra_grades_minus_btn"
+	                style="@style/NormalBtn"
+	                android:layout_width="0dp"
+	                android:layout_height="match_parent"
+	                android:layout_gravity="center_vertical"
+	                android:layout_marginLeft="8dp"
+	                android:layout_weight="1"
+	                android:text="@string/extra_button_minus"
+	                android:textSize="22sp"/>
+
+	            <TextView
+	                android:id="@+id/extra_grades_input_field"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center_vertical"
+	                android:layout_marginLeft="8dp"
+	                android:gravity="center"
+	                android:minWidth="50dp"
+	                android:textSize="25sp"
+	                />
+
+	            <TextView
+	                android:id="@+id/extra_grades_plus_btn"
+	                style="@style/NormalBtn"
+	                android:layout_width="0dp"
+	                android:layout_height="match_parent"
+	                android:layout_gravity="center_vertical"
+	                android:layout_marginLeft="8dp"
+	                android:layout_weight="1"
+	                android:text="@string/extra_button_plus"
+	                android:textSize="22sp"/>
+
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/grades_cards_container"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="8dp"
+	            android:background="?attr/container_card_background"
+	            android:clipChildren="true"
+	            android:orientation="vertical"
+	            android:padding="8dp">
+
+	            <LinearLayout
+	                android:id="@+id/grades_cards_header"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:minHeight="48dp"
+	                android:orientation="horizontal"
+	                >
+
+	                <TextView
+	                    android:layout_width="0dp"
+	                    android:layout_height="match_parent"
+	                    android:layout_marginBottom="4dp"
+	                    android:layout_weight="1"
+	                    android:gravity="center"
+	                    android:text="@string/grades_card_grades_hint_text"
+	                    android:textSize="22sp"/>
+
+	                <LinearLayout
+	                    android:layout_width="0.5dp"
+	                    android:layout_height="match_parent"
+	                    android:layout_marginLeft="4dp"
+	                    android:layout_marginRight="4dp"
+	                    android:background="#ff6d6d6d"
+	                    android:orientation="horizontal"/>
+
+	                <TextView
+	                    android:layout_width="96dp"
+	                    android:layout_height="match_parent"
+	                    android:layout_marginBottom="4dp"
+	                    android:gravity="center"
+	                    android:text="@string/grades_card_average_hint_text"
+	                    android:textSize="22sp"/>
+	            </LinearLayout>
+
+	            <LinearLayout
+	                android:id="@+id/grades_card_fragments_container"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:orientation="vertical"
+	                >
+	            </LinearLayout>
+	        </LinearLayout>
+
+	    </LinearLayout>
+
+	</ScrollView>
+
+	<LinearLayout
+		android:id="@+id/keypad_fragment"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation="vertical"/>
+
+</LinearLayout>

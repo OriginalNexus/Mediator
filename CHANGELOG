@@ -1,3 +1,13 @@
+v1.2.0 preview
+
+	Note that this is a preview of upcoming features. It is NOT finished so bugs might occur.
+
+	+ Report card is 80% done
+	* GradeCalc improved
+	* Better orientation-change management
+	+ Introduced new bugs with the keypad. Must rewrite it
+	* Probably not working on older phones (haven't tested yet)
+
 v1.1.0
 	* HUGE CHANGES
 	+ Implemented Android Support Libraries

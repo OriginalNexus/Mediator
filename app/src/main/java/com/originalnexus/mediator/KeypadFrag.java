@@ -34,7 +34,7 @@ public class KeypadFrag extends Fragment {
 	/**
 	 * State of the keyboard (hidden hidden by default)
 	 */
-	public boolean isHidden = true;
+	private boolean isHidden = true;
 	/**
 	 * View that contains the keyboard
 	 */
@@ -81,7 +81,7 @@ public class KeypadFrag extends Fragment {
 				// Hide the keypad
 				setHeight(0);
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-					((LinearLayout.LayoutParams) kView.getLayoutParams()).weight = 0;
+					((LinearLayout.LayoutParams) ((View)kView.getParent()).getLayoutParams()).weight = 0;
 				}
 				else {
 					/**
@@ -230,8 +230,9 @@ public class KeypadFrag extends Fragment {
 	 * @param sw 1 = open ; 0 = close; other = toggle
 	 */
 	public void toggleKeypad(int sw) {
+		if (kView == null) return;
 		// If an animation is in progress do nothing
-		if (kView.getAnimation() != null) return;
+		if (kView.getAnimation() == hideAnim || kView.getAnimation() == showAnim) return;
 
 		// Set isHidden property based on the switch
 
@@ -292,7 +293,7 @@ public class KeypadFrag extends Fragment {
 	 */
 	private void setHeight(int height) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			kView.getLayoutParams().height = height;
+			((View) kView.getParent()).getLayoutParams().height = height;
 		}
 		else {
 			/**

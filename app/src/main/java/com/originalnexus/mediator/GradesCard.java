@@ -8,13 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class GradesCard extends Fragment {
 	// Argument tags
 	private static final String ARG_START_HIDDEN = "startHidden";
 	private static final String ARG_HIDE_IF_INVALID = "hideIfInvalid";
 
-	private int[] grades = null;
+	private ArrayList<Integer> grades = null;
 	private int thesis = 0;
 	private int extra = 0;
 	private int finalAvg = 5;
@@ -43,19 +45,19 @@ public class GradesCard extends Fragment {
 	 * @param extraNum How many extra grades to get
 	 * @param finalAverage Final wanted average
 	 */
-	public void setData(int[] grades, int thesis, int extraNum, int finalAverage) {
+	public void setData(ArrayList<Integer> grades, int thesis, int extraNum, int finalAverage) {
 		this.grades = grades;
 		this.thesis = thesis;
 		this.extra = extraNum;
 		this.finalAvg = finalAverage;
 
 		// Set new state
-		int[] result = GradeCalc.calculateRequiredGrades(this.grades, this.thesis, this.extra, this.finalAvg);
-		if (result[0] == -1)
+		ArrayList<Integer> result = GradeCalc.calculateRequiredGrades(this.grades, this.thesis, this.extra, this.finalAvg);
+		if (result.get(0) == -1)
 			state = GradesCardState.INVALID;
-		if (result[0] == 0)
+		if (result.get(0) == 0)
 			state = GradesCardState.UNDER;
-		else if (result[0] == 11)
+		else if (result.get(0) == 11)
 			state = GradesCardState.OVER;
 		else
 			state = GradesCardState.VALID;
@@ -90,13 +92,8 @@ public class GradesCard extends Fragment {
 				case VALID:
 					// Can get given average
 					outText.setTextAppearance(getActivity(), R.style.GradesCard_Middle);
-					String outString = "";
-					int[] result = GradeCalc.calculateRequiredGrades(grades, thesis, extra, finalAvg);
-					for(int i = 0; i < result.length; i++) {
-						outString += result[i];
-						if (i < result.length - 1) outString += ", ";
-					}
-					outText.setText(outString);
+					ArrayList<Integer> result = GradeCalc.calculateRequiredGrades(grades, thesis, extra, finalAvg);
+					outText.setText(GradeCalc.arrayListToString(result));
 					break;
 			}
 		}

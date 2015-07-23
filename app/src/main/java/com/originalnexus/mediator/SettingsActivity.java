@@ -19,21 +19,20 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 		// Restore theme
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		String themeValue = settings.getString("pref_theme", "light");
-		if (themeValue != null)
-			switch (themeValue) {
-				case "dark":
-					setTheme(R.style.AppTheme_Dark);
-					break;
-				case "light":
-					setTheme(R.style.AppTheme_Light);
-					break;
-			}
+		switch (themeValue) {
+			case "dark":
+				setTheme(R.style.AppTheme_Dark);
+				break;
+			case "light":
+				setTheme(R.style.AppTheme_Light);
+				break;
+		}
 
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
 
 		Preference themePref = findPreference("pref_theme");
-		if (themePref != null && themeValue != null)
+		if (themePref != null)
 			switch (themeValue) {
 				case "dark":
 					themePref.setSummary(R.string.pref_theme_summary_dark);

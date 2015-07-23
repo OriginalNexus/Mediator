@@ -41,4 +41,6 @@
 	<color name="grades_card_under_light">#ff9b0000</color>
 	<color name="grades_card_under_dark">#ffff0000</color>
 
+	<color name="ripple">#ff0394e2</color>
+
 </resources>

@@ -86,5 +86,12 @@
 	<string name="drawer_item_settings">Setări</string>
 	<string name="drawer_item_about">Despre</string>
 	<string name="drawer_item_help">Ajutor</string>
+	<string name="subject_item_thesis">Teză:</string>
+	<string name="subject_item_grades">Note:</string>
+	<string name="name_dialog_title">Nume materie</string>
+	<string name="name_dialog_ok">OK</string>
+	<string name="name_dialog_cancel">Anulați</string>
+	<string name="sub_frag_grades">Note:</string>
+	<string name="sub_frag_thesis">Teza:</string>
 
 </resources>
