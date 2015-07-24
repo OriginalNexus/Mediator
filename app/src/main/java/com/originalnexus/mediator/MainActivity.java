@@ -22,18 +22,13 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 
 	// Constants
 
-	private static final String FRAGMENT_TAG_MEDIATOR = "frag_mediator";
-	private static final String FRAGMENT_TAG_REPORT_CARD = "frag_report_card";
-	private static final String STATE_FRAGMENT_TAG = "fragment_tag";
-
 
 	// Global Variables
 	// Singleton
 	private static MainActivity instance = null;
 	// Drawer toggle for the action bar
 	private ActionBarDrawerToggle drawerToggle;
-	// Current layout tag
-	private String currentFragmentTag = FRAGMENT_TAG_MEDIATOR;
+
 
 	@Nullable
 	public static MainActivity getInstance() {
@@ -88,16 +83,14 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 				boolean closeDrawer = true;
 				switch (menuItem.getItemId()) {
 					case R.id.drawer_item_mediator:
-						if (fragMan.findFragmentByTag(FRAGMENT_TAG_MEDIATOR) == null) {
-							fragMan.beginTransaction().replace(R.id.fragment_container, new MediatorFrag(), FRAGMENT_TAG_MEDIATOR).commit();
-							currentFragmentTag = FRAGMENT_TAG_MEDIATOR;
-						}
+						fragMan.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+						fragMan.beginTransaction().replace(R.id.fragment_container, new MediatorFrag()).commit();
+						fragMan.executePendingTransactions();
 						break;
 					case R.id.drawer_item_report_card:
-						if (fragMan.findFragmentByTag(FRAGMENT_TAG_REPORT_CARD) == null) {
-							fragMan.beginTransaction().replace(R.id.fragment_container, new ReportCardFrag(), FRAGMENT_TAG_REPORT_CARD).commit();
-							currentFragmentTag = FRAGMENT_TAG_REPORT_CARD;
-						}
+						fragMan.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+						fragMan.beginTransaction().replace(R.id.fragment_container, new ReportCardFrag()).commit();
+						fragMan.executePendingTransactions();
 						break;
 
 					case R.id.drawer_item_settings:
@@ -126,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 				// Close the drawer
 				if (closeDrawer) drawerLayout.closeDrawers();
 
-				return true;
+				return false;
 			}
 		});
 
@@ -136,10 +129,8 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 
 		// Add/Restore fragment
 		if (savedInstanceState == null)
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MediatorFrag(), FRAGMENT_TAG_MEDIATOR).commit();
-		else {
-			currentFragmentTag = savedInstanceState.getString(STATE_FRAGMENT_TAG);
-		}
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MediatorFrag()).commit();
+
 	}
 
 	@Override
@@ -185,12 +176,6 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		outState.putString(STATE_FRAGMENT_TAG, currentFragmentTag);
-		super.onSaveInstanceState(outState);
-	}
-
-	@Override
 	public void onNameDialogConfirm(int requestCode, String input) {
 		switch (requestCode) {
 			case ReportCardFrag.DIALOG_REQ_CODE:
@@ -211,5 +196,9 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 	@Override
 	public void onItemClick(int index) {
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SubjectFrag.newInstance(index)).addToBackStack(null).commit();
+	}
+
+	public void openMediator(Subject subject) {
+		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, MediatorFrag.newInstance(subject)).addToBackStack(null).commit();
 	}
 }

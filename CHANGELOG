@@ -1,26 +1,39 @@
+v1.2.0 preview 2
+
+	Note that this is a preview of upcoming features. It is NOT finished.
+
+	++ Brand new KeypadView
+	-- Removed old KeypadFrag
+	** All keypad bugs fixed
+	++ Animations for Android < 3.0 (thanks to NineOldAndroids)
+	++ Added "Go to Mediator" button
+	** Fixed other bugs
+
 v1.2.0 preview
 
-	Note that this is a preview of upcoming features. It is NOT finished so bugs might occur.
+	Note that this is a preview of upcoming features. It is NOT finished.
 
-	+ Report card is 80% done
-	* GradeCalc improved
-	* Better orientation-change management
-	+ Introduced new bugs with the keypad. Must rewrite it
-	* Probably not working on older phones (haven't tested yet)
+	++ Report card is 80% done
+	** GradeCalc improved
+	** Better orientation-change management
+	++ Introduced new bugs with the keypad. Must rewrite it
+	** Probably not working on older phones (haven't tested yet)
 
 v1.1.0
-	* HUGE CHANGES
-	+ Implemented Android Support Libraries
-	* Application is now available for Android 2.2 and above
-	+ Added navigation drawer
-	+ Materialised whole app
-	+ Added Settings
-	+ Added Black theme (change from settings)
-	+ Added this changelog
-	* Updated colors and UI
-	* Updated About dialog
-	* Bugs fixed
-	* Some other things I forgot to mention
+
+	** HUGE CHANGES
+	++ Implemented Android Support Libraries
+	** Application is now available for Android 2.2 and above
+	++ Added navigation drawer
+	++ Materialised whole app
+	++ Added Settings
+	++ Added Black theme (change from settings)
+	++ Added this changelog
+	** Updated colors and UI
+	** Updated About dialog
+	** Bugs fixed
+	** Some other things I forgot to mention
 
 v1.0.0
-	* First version, includes basic app
+
+	** First version, includes basic app

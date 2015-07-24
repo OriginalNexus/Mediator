@@ -12,31 +12,17 @@ import java.util.ArrayList;
 
 
 public class GradesCard extends Fragment {
-	// Argument tags
-	private static final String ARG_START_HIDDEN = "startHidden";
-	private static final String ARG_HIDE_IF_INVALID = "hideIfInvalid";
 
 	private ArrayList<Integer> grades = null;
 	private int thesis = 0;
 	private int extra = 0;
 	private int finalAvg = 5;
 
-	private GradesCardState state = GradesCardState.INVALID;
-	private boolean startHidden = false;
-	private boolean hideIfInvalid = true;
+	public boolean started = false;
+	public boolean startHidden = true;
 
-	/**
-	 * Creates a new instance of the fragment and sets some options
-	 * @return The new fragment
-	 */
-	public static GradesCard newInstance() {
-		GradesCard fragment = new GradesCard();
-		Bundle args = new Bundle();
-		args.putBoolean(ARG_START_HIDDEN, true);
-		args.putBoolean(ARG_HIDE_IF_INVALID, true);
-		fragment.setArguments(args);
-		return fragment;
-	}
+	private GradesCardState state = GradesCardState.INVALID;
+
 
 	/**
 	 * Updates the card data and state. DOES NOT UPDATE VIEWS. Use updateViews() for that
@@ -76,8 +62,7 @@ public class GradesCard extends Fragment {
 			switch (state) {
 				case INVALID:
 					// Something is incorrect
-					if (hideIfInvalid)
-						getFragmentManager().beginTransaction().hide(this).commit();
+					getFragmentManager().beginTransaction().hide(this).commit();
 					return;
 				case UNDER:
 					// Gets under given average
@@ -110,16 +95,6 @@ public class GradesCard extends Fragment {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// Retrieve arguments if any
-		if (getArguments() != null) {
-			startHidden = getArguments().getBoolean(ARG_START_HIDDEN, startHidden);
-			hideIfInvalid = getArguments().getBoolean(ARG_HIDE_IF_INVALID, hideIfInvalid);
-		}
-	}
-
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.grades_card, container, false);
@@ -130,6 +105,7 @@ public class GradesCard extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		if (startHidden) getFragmentManager().beginTransaction().hide(this).commit();
 		updateViews();
+		started = true;
 	}
 
 	/**

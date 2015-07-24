@@ -6,4 +6,12 @@
 	<attr name="drawer_header_text_background" format="color" />
 	<attr name="grades_card_over" format="color" />
 	<attr name="grades_card_under" format="color" />
+
+	<declare-styleable name="KeypadView">
+		<attr name="slide_direction" format="enum">
+			<enum name="horizontal" value="0" />
+			<enum name="vertical" value="1" />
+		</attr>
+
+	</declare-styleable>
 </resources>

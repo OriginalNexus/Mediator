@@ -93,5 +93,6 @@
 	<string name="name_dialog_cancel">Anulați</string>
 	<string name="sub_frag_grades">Note:</string>
 	<string name="sub_frag_thesis">Teza:</string>
+	<string name="sub_frag_mediator_btn">Spre Mediator</string>
 
 </resources>

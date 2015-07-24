@@ -33,7 +33,7 @@ public class AboutDialog extends DialogFragment {
 		// Create view
 		TextView mView = new TextView(getActivity());
 		mView.setMovementMethod(LinkMovementMethod.getInstance());
-		int px = (int) (16 * getResources().getDisplayMetrics().density + 0.5);
+		int px = (int) getResources().getDimension(R.dimen.Dialog_padding);
 		mView.setPadding(px,px,px,px);
 		mView.setText(Html.fromHtml(msg));
 		// On android level < 11 background of dialog is always black so we make the text white

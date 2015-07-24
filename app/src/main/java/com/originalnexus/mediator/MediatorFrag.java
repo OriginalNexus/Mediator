@@ -27,7 +27,6 @@ public class MediatorFrag extends Fragment {
 	private static final String STATE_THESIS = "thesis";
 	private static final String STATE_EXTRA_GRADES = "extra_grades";
 	private static final String STATE_INPUT_FIELD = "input_field";
-	private static final String STATE_KEYPAD_IS_HIDDEN = "keypad_hidden";
 
 	// Global variables
 
@@ -42,9 +41,16 @@ public class MediatorFrag extends Fragment {
 	// Id of the active input field
 	private int activeInputFieldId = 0;
 	// Keypad fragment
-	private KeypadFrag keypad;
-	private boolean keypadIsHidden = true;
+	private KeypadView keypad;
 
+	public static MediatorFrag newInstance(Subject s) {
+		MediatorFrag f = new MediatorFrag();
+		Subject sClone = new Subject(s);
+		f.grades = sClone.grades;
+		f.thesis = sClone.thesis;
+		f.extraGrades = 1;
+		return f;
+	}
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -53,133 +59,125 @@ public class MediatorFrag extends Fragment {
 		// Create grade card fragments
 		createGradeCards();
 
-		// Keypad fragment
-		if (savedInstanceState == null) {
-			getChildFragmentManager().beginTransaction().replace(R.id.keypad_fragment, new KeypadFrag()).commit();
-			getChildFragmentManager().executePendingTransactions();
-		}
-		keypad = (KeypadFrag) getChildFragmentManager().findFragmentById(R.id.keypad_fragment);
-
-		// Add event listener for key presses
-		keypad.addKeypadListener(new KeypadFrag.KeypadListener() {
-			@Override
-			public void keyPressed(KeypadFrag.KeypadEvent e) {
-				// This is the "Done" button
-				if (e.btnType == KeypadFrag.KeypadBtnType.DONE) {
-					// Close the keypad
-					keypad.toggleKeypad(0);
-					keypadIsHidden = false;
-				}
-				// This is the "Remove" button
-				else if (e.btnType == KeypadFrag.KeypadBtnType.REMOVE) {
-					if (activeInputFieldId == R.id.grades_input_field) {
-						// Remove one
-						if (!grades.isEmpty()) grades.remove(grades.size() - 1);
-					}
-					if (activeInputFieldId == R.id.thesis_input_field) {
-						// Clear thesis
-						thesis = 0;
-					}
-
-					// Update
-					updateViews();
-				}
-				// This is a digit button
-				else if (e.btnType == KeypadFrag.KeypadBtnType.DIGIT) {
-					if (activeInputFieldId == R.id.grades_input_field) {
-						// Add to grades array
-						grades.add(e.digit);
-					}
-					if (activeInputFieldId == R.id.thesis_input_field) {
-						// Set new thesis
-						thesis = e.digit;
-					}
-					// Update
-					updateViews();
-				}
-			}
-
-			@Override
-			public void keyLongPressed(final KeypadFrag.KeypadEvent e) {
-				if (e.btnType == KeypadFrag.KeypadBtnType.REMOVE) {
-					if (activeInputFieldId == R.id.grades_input_field) {
-						final Timer timer = new Timer();
-						timer.scheduleAtFixedRate(new TimerTask() {
-							@Override
-							public void run() {
-								// Check to see if button is still pressed
-								if (!e.sender.isPressed()) {
-									timer.cancel();
-									timer.purge();
-								}
-
-								// Delete one grade
-								if (!grades.isEmpty()) grades.remove(grades.size() - 1);
-								getActivity().runOnUiThread(new Runnable() {
-									@Override
-									public void run() {
-										updateViews();
-									}
-								});
-							}
-						}, 0, LONG_PRESS_REMOVE_DELAY);
-					}
-					else if (activeInputFieldId == R.id.thesis_input_field) {
-						// Clear thesis
-						thesis = 0;
-						updateViews();
-					}
-				}
-				else if (e.btnType == KeypadFrag.KeypadBtnType.DIGIT) {
-					if (activeInputFieldId == R.id.grades_input_field) {
-						final Timer timer = new Timer();
-						final int digitLongPressed = e.digit;
-						timer.scheduleAtFixedRate(new TimerTask() {
-							@Override
-							public void run() {
-								// Check to see if button is still pressed
-								if (!e.sender.isPressed()) {
-									timer.cancel();
-									timer.purge();
-								}
-
-								// Add to grades array
-								grades.add(digitLongPressed);
-
-								// Update
-								getActivity().runOnUiThread(new Runnable() {
-									@Override
-									public void run() {
-										updateViews();
-									}
-								});
-							}
-						}, 0, LONG_PRESS_REMOVE_DELAY);
-					}
-					else if (activeInputFieldId == R.id.thesis_input_field) {
-						// Set new thesis
-						thesis = e.digit;
-						updateViews();
-					}
-				}
-			}
-		});
-
-		// Add click events
 		if (getView() != null) {
+			keypad = (KeypadView) getView().findViewById(R.id.keypad_view);
+
+			// Add event listener for key presses
+			keypad.addKeypadListener(new KeypadView.KeypadListener() {
+				@Override
+				public void keyPressed(KeypadView.KeypadEvent e) {
+					// This is the "Done" button
+					if (e.btnType == KeypadView.KeypadBtnType.DONE) {
+						// Close the keypad
+						keypad.toggleKeypad(0);
+					}
+					// This is the "Remove" button
+					else if (e.btnType == KeypadView.KeypadBtnType.REMOVE) {
+						if (activeInputFieldId == R.id.grades_input_field) {
+							// Remove one
+							if (!grades.isEmpty()) grades.remove(grades.size() - 1);
+						}
+						if (activeInputFieldId == R.id.thesis_input_field) {
+							// Clear thesis
+							thesis = 0;
+						}
+
+						// Update
+						updateViews();
+					}
+					// This is a digit button
+					else if (e.btnType == KeypadView.KeypadBtnType.DIGIT) {
+						if (activeInputFieldId == R.id.grades_input_field) {
+							// Add to grades array
+							grades.add(e.digit);
+						}
+						if (activeInputFieldId == R.id.thesis_input_field) {
+							// Set new thesis
+							thesis = e.digit;
+						}
+						// Update
+						updateViews();
+					}
+				}
+
+				@Override
+				public void keyLongPressed(final KeypadView.KeypadEvent e) {
+					if (e.btnType == KeypadView.KeypadBtnType.REMOVE) {
+						if (activeInputFieldId == R.id.grades_input_field) {
+							final Timer timer = new Timer();
+							timer.scheduleAtFixedRate(new TimerTask() {
+								@Override
+								public void run() {
+									// Check to see if button is still pressed
+									if (!e.sender.isPressed()) {
+										timer.cancel();
+										timer.purge();
+									}
+
+									// Delete one grade
+									if (!grades.isEmpty()) grades.remove(grades.size() - 1);
+									getActivity().runOnUiThread(new Runnable() {
+										@Override
+										public void run() {
+											updateViews();
+										}
+									});
+								}
+							}, 0, LONG_PRESS_REMOVE_DELAY);
+						}
+						else if (activeInputFieldId == R.id.thesis_input_field) {
+							// Clear thesis
+							thesis = 0;
+							updateViews();
+						}
+					}
+					else if (e.btnType == KeypadView.KeypadBtnType.DIGIT) {
+						if (activeInputFieldId == R.id.grades_input_field) {
+							final Timer timer = new Timer();
+							final int digitLongPressed = e.digit;
+							timer.scheduleAtFixedRate(new TimerTask() {
+								@Override
+								public void run() {
+									// Check to see if button is still pressed
+									if (!e.sender.isPressed()) {
+										timer.cancel();
+										timer.purge();
+									}
+
+									// Add to grades array
+									grades.add(digitLongPressed);
+
+									// Update
+									getActivity().runOnUiThread(new Runnable() {
+										@Override
+										public void run() {
+											updateViews();
+										}
+									});
+								}
+							}, 0, LONG_PRESS_REMOVE_DELAY);
+						}
+						else if (activeInputFieldId == R.id.thesis_input_field) {
+							// Set new thesis
+							thesis = e.digit;
+							updateViews();
+						}
+					}
+				}
+			});
+
+			// Add click events for other components
 			View.OnClickListener l = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					if (v.getId() == R.id.grades_input_field) {
 						// Set new focus and toggle keypad
 						keypad.toggleKeypad(1);
-						keypadIsHidden = true;
 						focusField(R.id.grades_input_field);
 					}
 					else if (v.getId() == R.id.thesis_input_field) {
 						// Set new focus and toggle keypad
 						keypad.toggleKeypad(1);
-						keypadIsHidden = true;
 						focusField(R.id.thesis_input_field);
 					}
 					else if (v.getId() == R.id.extra_grades_minus_btn) {
@@ -208,13 +206,7 @@ public class MediatorFrag extends Fragment {
 			thesis = savedInstanceState.getInt(STATE_THESIS);
 			extraGrades = savedInstanceState.getInt(STATE_EXTRA_GRADES);
 			activeInputFieldId = savedInstanceState.getInt(STATE_INPUT_FIELD);
-			keypadIsHidden = savedInstanceState.getBoolean(STATE_KEYPAD_IS_HIDDEN);
 		}
-
-		// Restore keypad
-		// TODO: Fix Bug on api 10 when changing orientation
-		// TODO: Fix not restoring
-		keypad.toggleKeypad(keypadIsHidden ? 0 : 1);
 
 		updateViews();
 	}
@@ -263,12 +255,12 @@ public class MediatorFrag extends Fragment {
 	 * Creates all the grades cards fragments and adds them to their container
 	 */
 	private void createGradeCards() {
+		FragmentTransaction fragTrans = getChildFragmentManager().beginTransaction();
 		for (int i = 1; i <= 10; i++) {
-			GradesCard f = GradesCard.newInstance();
-			getChildFragmentManager().beginTransaction()
-					.add(R.id.grades_card_fragments_container, f, gradesCardTagPrefix + i)
-					.commit();
+			fragTrans.add(R.id.grades_card_fragments_container, new GradesCard(), gradesCardTagPrefix + i);
 		}
+		fragTrans.commit();
+		getChildFragmentManager().executePendingTransactions();
 	}
 
 	/**
@@ -306,21 +298,27 @@ public class MediatorFrag extends Fragment {
 		}
 
 		cardIsVisible[0] = false;
-		FragmentTransaction fragTrans;
+		FragmentTransaction fragTrans = fragMan.beginTransaction();
 		for (int i = 1; i <= 10; i++) {
-			fragTrans = fragMan.beginTransaction();
 			GradesCard f = (GradesCard) fragMan.findFragmentByTag(gradesCardTagPrefix + i);
 			if (f == null) continue;
 
 			if (cardIsVisible[i - 1]) {
-				f.updateViews();
-				if (f.isHidden()) fragTrans.show(f);
+				if (!f.started) f.startHidden = false;
+				else {
+					if (f.isHidden()) {
+						fragTrans.show(f);
+					}
+					f.updateViews();
+				}
 			}
-			else if (!cardIsVisible[i - 1] && f.isVisible())
-				fragTrans.hide(f);
-			fragTrans.commit();
-			fragMan.executePendingTransactions();
+			else if (!cardIsVisible[i - 1])
+				if (!f.started) f.startHidden = true;
+				else if (f.isVisible())
+					fragTrans.hide(f);
 		}
+		fragTrans.commit();
+		fragMan.executePendingTransactions();
 	}
 
 	/**
@@ -349,7 +347,6 @@ public class MediatorFrag extends Fragment {
 		outState.putInt(STATE_THESIS, thesis);
 		outState.putInt(STATE_EXTRA_GRADES, extraGrades);
 		outState.putInt(STATE_INPUT_FIELD, activeInputFieldId);
-		outState.putBoolean(STATE_KEYPAD_IS_HIDDEN, keypadIsHidden);
 
 		super.onSaveInstanceState(outState);
 	}
@@ -362,7 +359,6 @@ public class MediatorFrag extends Fragment {
 			thesis = savedInstanceState.getInt(STATE_THESIS);
 			extraGrades = savedInstanceState.getInt(STATE_EXTRA_GRADES);
 			activeInputFieldId = savedInstanceState.getInt(STATE_INPUT_FIELD);
-			keypadIsHidden = savedInstanceState.getBoolean(STATE_KEYPAD_IS_HIDDEN);
 		}
 	}
 }

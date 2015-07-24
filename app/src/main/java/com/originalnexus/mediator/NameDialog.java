@@ -76,7 +76,7 @@ public class NameDialog extends DialogFragment {
 
 		// Create root view
 		FrameLayout rootView = new FrameLayout(getActivity());
-		int px = (int) (16 * getResources().getDisplayMetrics().density + 0.5);
+		int px = (int) getResources().getDimension(R.dimen.Dialog_padding);
 		rootView.setPadding(px, px, px, px);
 		rootView.addView(editT);
 

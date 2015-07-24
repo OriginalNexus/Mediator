@@ -13,6 +13,12 @@ class Subject {
 		this.thesis = 0;
 	}
 
+	Subject(Subject s) {
+		this.name = s.name;
+		this.grades = new ArrayList<>(s.grades);
+		this.thesis = s.thesis;
+	}
+
 	@SuppressWarnings("unused")
 	Subject (String name, ArrayList<Integer> grades, int thesis) {
 		this.name = name;

@@ -35,7 +35,7 @@ public class HelpDialog extends DialogFragment {
 
 		ScrollView rootView = new ScrollView(getActivity());
 		rootView.addView(message);
-		int px = (int) (16 * getResources().getDisplayMetrics().density + 0.5);
+		int px = (int) getResources().getDimension(R.dimen.Dialog_padding);
 		rootView.setPadding(px,px,px,px);
 		builder.setView(rootView);
 		return builder.create();
