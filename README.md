@@ -21,7 +21,7 @@ Andrei are nevoie de 5 note la matematică. Până acum el a luat doar **3** not
 
 **Sertar de navigație.** Trăgând din partea stângă a ecranului sau apăsând pe butonul din stânga-sus, vom deschide un sertar de navigație de unde putem accesa principalele funcții ale aplicației: Mediator, Carnet de note, Setări, Ajutor și Despre.
 
-**Carnetul de note** te ajută să îți gestionezi notele foarte simplu. Utilizatorul adaugă materiile de la școală și completează la fiecare pe parcursul anului notele obținute. Astfel el are mediile la toate obiectele deja făcute, putând analiza situația și progresul școlar fără efort. După ce apăsăm pe butonul + din partea de jos a ecranului, introducem numele materiei și aceasta va apărea în listă. Selecția unei materii ne va permite să edităm notele obținute, teza sau să o ștergem.De asemenea avem și un buton „Spre Mediator” ce ne va duce direct la acesta, completând automat notele și teza.
+**Carnetul de note** te ajută să îți gestionezi notele foarte simplu. Utilizatorul adaugă materiile de la școală și completează la fiecare pe parcursul anului notele obținute. Astfel el are mediile la toate obiectele deja făcute, putând analiza situația și progresul școlar fără efort. După ce apăsăm pe butonul + din partea de jos a ecranului, introducem numele materiei și aceasta va apărea în listă. Selecția unei materii ne va permite să edităm notele obținute, teza sau să o ștergem. De asemenea avem și un buton „Spre Mediator” ce ne va duce direct la acesta, completând automat notele și teza.
 
 **Setările** conțin momentan doar posibilitatea de a alege tema aplicației ( *alb* sau *negru* ).
 
