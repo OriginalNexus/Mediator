@@ -24,7 +24,7 @@ import java.util.EventObject;
 public class KeypadView extends LinearLayout {
 
 	public enum SlideDirection {
-		VERTICAL, ORIZONTAL
+		VERTICAL, HORIZONTAL
 	}
 	private SlideDirection slideDirection;
 
@@ -71,7 +71,7 @@ public class KeypadView extends LinearLayout {
 			int temp = a.getInt(R.styleable.KeypadView_slide_direction, 0);
 			switch (temp) {
 				case 0:
-					slideDirection = SlideDirection.ORIZONTAL;
+					slideDirection = SlideDirection.HORIZONTAL;
 					break;
 				case 1:
 					slideDirection = SlideDirection.VERTICAL;
@@ -168,7 +168,7 @@ public class KeypadView extends LinearLayout {
 	}
 
 	private void updateAnimations() {
-		if (slideDirection == SlideDirection.ORIZONTAL) {
+		if (slideDirection == SlideDirection.HORIZONTAL) {
 			hideAnim = ObjectAnimator.ofInt(this, "width", maxWidth, 0).setDuration(ANIMATION_LENGTH);
 			hideAnim.setInterpolator(new AccelerateInterpolator());
 			hideAnim.addListener(new AnimatorListenerAdapter() {
@@ -239,7 +239,8 @@ public class KeypadView extends LinearLayout {
 	 */
 	public void toggleKeypad(int sw) {
 		// If an animation is in progress do nothing
-		if (getAnimation() != null) return;
+		if (hideAnim != null && hideAnim.isStarted()) return;
+		if (showAnim != null && showAnim.isStarted()) return;
 
 		// Set isHidden property based on the switch
 		if (sw == 0) isHidden = true;
@@ -276,7 +277,7 @@ public class KeypadView extends LinearLayout {
 	 * Shows the keypad immediately
 	 */
 	private void show() {
-		if (slideDirection == SlideDirection.ORIZONTAL)
+		if (slideDirection == SlideDirection.HORIZONTAL)
 			setWidth(maxWidth);
 		else
 			setHeight(maxHeight);
@@ -287,7 +288,7 @@ public class KeypadView extends LinearLayout {
 	 * Hides the keypad immediately
 	 */
 	private void hide() {
-		if (slideDirection == SlideDirection.ORIZONTAL)
+		if (slideDirection == SlideDirection.HORIZONTAL)
 			setWidth(0);
 		else
 			setHeight(0);
@@ -385,5 +386,9 @@ public class KeypadView extends LinearLayout {
 			state = b.getParcelable(STATE_INSTANCE_STATE);
 		}
 		super.onRestoreInstanceState(state);
+	}
+
+	public boolean isKeypadHidden() {
+		return isHidden;
 	}
 }

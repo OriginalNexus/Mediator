@@ -122,4 +122,16 @@ class GradeCalc {
 		}
 		return out;
 	}
+
+	/**
+	 * Returns the rounded average.
+	 * Examples:
+	 * roundAverage(7.43) = 7
+	 * roundAverage(7.89) = 8
+	 * @param avg The average to round
+	 * @return The rounded average
+	 */
+	public static int roundAverage(double avg) {
+		return (int) Math.floor(avg + 0.5);
+	}
 }

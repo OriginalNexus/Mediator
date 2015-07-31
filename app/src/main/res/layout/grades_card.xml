@@ -40,7 +40,7 @@
 			android:layout_height="match_parent"
 			android:layout_marginLeft="4dp"
 			android:layout_marginRight="4dp"
-			android:background="#ff6d6d6d"
+			android:background="?attr/separator_color"
 			android:orientation="horizontal"/>
 
 		<TextView

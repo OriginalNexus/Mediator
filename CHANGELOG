@@ -1,3 +1,15 @@
+v1.2.0
+
+	++ Button to delete subjects
+	** Fixed some UI colors
+	++ Pressing back will close the keypad if opened
+	-- Removed card views
+	** Discovered bug with orientation change (it's harmless for now)
+	-- Removed grades hint (confuses some people)
+	** Fixed empty subjects in Report Card
+	** Updated README
+	** Some other fixes
+
 v1.2.0 preview 2
 
 	Note that this is a preview of upcoming features. It is NOT finished.

@@ -20,6 +20,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 		final TextView gradesView;
 		final TextView thesisView;
 		final TextView averageView;
+		final TextView thesisTextView;
 		int index;
 
 		SubjectViewHolder(View v) {
@@ -29,7 +30,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 			gradesView = (TextView) v.findViewById(R.id.grades);
 			thesisView = (TextView) v.findViewById(R.id.thesis);
 			averageView = (TextView) v.findViewById(R.id.average);
-
+			thesisTextView = (TextView) v.findViewById(R.id.thesis_text);
 		}
 
 	}
@@ -79,12 +80,18 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 		Subject s = subjects.get(i);
 		subjectViewHolder.index = i;
 		subjectViewHolder.nameView.setText(s.name);
-		subjectViewHolder.gradesView.setText(GradeCalc.arrayListToString(s.grades));
-		subjectViewHolder.thesisView.setText(Integer.toString(s.thesis));
+		if (s.grades.size() > 0)
+			subjectViewHolder.gradesView.setText(GradeCalc.arrayListToString(s.grades));
+		if (s.thesis != 0)
+			subjectViewHolder.thesisView.setText(Integer.toString(s.thesis));
+		else {
+			subjectViewHolder.thesisTextView.setVisibility(View.GONE);
+		}
 
 		// Get average
 		double average = GradeCalc.average(s.grades, s.thesis);
-		subjectViewHolder.averageView.setText(Double.toString(average));
+		if (average != 0)
+			subjectViewHolder.averageView.setText(Double.toString(average));
 	}
 
 	/**
@@ -93,7 +100,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 	 */
 	public void addSubject(Subject sub) {
 		subjects.add(sub);
-		this.notifyDataSetChanged();
+		notifyItemInserted(getItemCount() - 1);
 	}
 
 	/**
@@ -104,7 +111,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 	@SuppressWarnings("unused")
 	public void addSubject(Subject sub, int pos) {
 		subjects.add(pos, sub);
-		this.notifyDataSetChanged();
+		notifyItemInserted(pos);
+	}
+
+	public void removeSubject(int index) {
+		subjects.remove(index);
+		notifyItemRemoved(index);
 	}
 
 	public void saveSubjects() {

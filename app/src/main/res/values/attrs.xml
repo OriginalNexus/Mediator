@@ -6,6 +6,9 @@
 	<attr name="drawer_header_text_background" format="color" />
 	<attr name="grades_card_over" format="color" />
 	<attr name="grades_card_under" format="color" />
+	<attr name="subject_header_color" format="color" />
+	<attr name="background_main" format="color" />
+	<attr name="separator_color" format="color" />
 
 	<declare-styleable name="KeypadView">
 		<attr name="slide_direction" format="enum">

@@ -25,8 +25,8 @@
 	<color name="keypad_pressed_border_dark">#ffb9b9b9</color>
 
 
-	<color name="colorPrimary">#ff2578ec</color>
-	<color name="colorPrimaryDark">#ff1056b2</color>
+	<color name="colorPrimary">#3F51B5</color>
+	<color name="colorPrimaryDark">#303F9F</color>
 
 	<color name="text_light">#101010</color>
 	<color name="text_dark">#efefef</color>
@@ -41,6 +41,9 @@
 	<color name="grades_card_under_light">#ff9b0000</color>
 	<color name="grades_card_under_dark">#ffff0000</color>
 
-	<color name="ripple">#ff0394e2</color>
+	<color name="subject_header_color_light">#fff</color>
+	<color name="subject_header_color_dark">#000</color>
+
+	<color name="ripple">#5C6BC0</color>
 
 </resources>

@@ -6,7 +6,7 @@
 
 		<item
 			android:id="@+id/drawer_item_mediator"
-			android:checked="false"
+			android:checked="true"
 			android:title="@string/drawer_item_mediator"/>
 		<item
 			android:id="@+id/drawer_item_report_card"

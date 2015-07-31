@@ -2,4 +2,5 @@
 <resources>
 	<dimen name="KeypadView_padding">6dp</dimen>
 	<dimen name="Dialog_padding">16dp</dimen>
+	<dimen name="ActionBar_elevation">4dp</dimen>
 </resources>

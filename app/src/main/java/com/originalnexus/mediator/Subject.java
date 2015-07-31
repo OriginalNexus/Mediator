@@ -1,5 +1,7 @@
 package com.originalnexus.mediator;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
 class Subject {
@@ -13,7 +15,13 @@ class Subject {
 		this.thesis = 0;
 	}
 
-	Subject(Subject s) {
+	Subject(@Nullable Subject s) {
+		if (s == null) {
+			this.name = "";
+			this.grades = new ArrayList<>();
+			this.thesis = 0;
+			return;
+		}
 		this.name = s.name;
 		this.grades = new ArrayList<>(s.grades);
 		this.thesis = s.thesis;

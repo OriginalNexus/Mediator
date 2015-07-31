@@ -8,6 +8,9 @@
 		<item name="drawer_header_text_background">@color/drawer_header_text_background_light</item>
 		<item name="grades_card_over">@color/grades_card_over_light</item>
 		<item name="grades_card_under">@color/grades_card_under_light</item>
+		<item name="subject_header_color">@color/subject_header_color_light</item>
+		<item name="background_main">#FAFAFA</item>
+		<item name="separator_color">#ff6d6d6d</item>
 
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -24,18 +27,19 @@
 		<item name="drawer_header_text_background">@color/drawer_header_text_background_dark</item>
 		<item name="grades_card_over">@color/grades_card_over_dark</item>
 		<item name="grades_card_under">@color/grades_card_under_dark</item>
+		<item name="subject_header_color">@color/subject_header_color_dark</item>
+		<item name="background_main">#303030</item>
+		<item name="separator_color">#9b9b9b</item>
 
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 	</style>
-
-
 	
-	<style name="ActionBar" parent="ThemeOverlay.AppCompat.Dark">
+	<style name="ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
 		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
 	</style>
 
-	<style name="ActionBar.Light" parent="ThemeOverlay.AppCompat.Dark">
+	<style name="ActionBar.Light" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
 		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
 	</style>
 	

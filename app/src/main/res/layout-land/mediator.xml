@@ -3,13 +3,13 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:orientation="vertical"
+	android:orientation="horizontal"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
 	<ScrollView
-	    android:layout_width="match_parent"
-	    android:layout_height="0dp"
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
 	    android:animateLayoutChanges="true"
 	    android:layout_weight="1"
 	    tools:ignore="UnusedAttribute">
@@ -241,9 +241,9 @@
 
 	<com.originalnexus.mediator.KeypadView
 		android:id="@+id/keypad_view"
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
 		android:layout_weight="1"
-		app:slide_direction="vertical"/>
+		app:slide_direction="horizontal"/>
 
 </LinearLayout>

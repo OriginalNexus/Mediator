@@ -18,7 +18,7 @@
 	<string name="digit_10">10</string>
 	<string name="digit_remove">—</string>
 	<string name="digit_done">Gata</string>
-	<string name="enter_grades_hint">9, 8, 6, 9?</string>
+	<string name="enter_grades_hint"/>
 	<string name="average_text">Media:</string>
 	<string name="extra_grades_text">Note în plus:</string>
 	<string name="grades_card_over">Ai cel puțin</string>
@@ -76,8 +76,8 @@
 	<string name="pref_title">Preferințe</string>
 	<string name="pref_theme_summary_light">Alb</string>
 	<string name="pref_theme_summary_dark">Negru</string>
-	<string name="drawer_open">Drawer Open</string>
-	<string name="drawer_close">Drawer Close</string>
+	<string name="drawer_open">Deschide sertar</string>
+	<string name="drawer_close">Închide sertar</string>
 	<string name="drawer_header_title">Mediator</string>
 	<string name="drawer_header_subtitle">te scapă de calculator</string>
 	<string name="drawer_header_image_description">Mediator Image</string>
@@ -94,5 +94,8 @@
 	<string name="sub_frag_grades">Note:</string>
 	<string name="sub_frag_thesis">Teza:</string>
 	<string name="sub_frag_mediator_btn">Spre Mediator</string>
+	<string name="report_card_title">Carnet de note</string>
+	<string name="menu_delete">Șterge</string>
+	<string name="subject_item_grades_hint">Nici o notă</string>
 
 </resources>

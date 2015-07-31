@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,10 +21,6 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NameDialog.NameDialogListener, ReportCardFrag.ItemClickListener{
 
-	// Constants
-
-
-	// Global Variables
 	// Singleton
 	private static MainActivity instance = null;
 	// Drawer toggle for the action bar
@@ -63,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 
 		// Setup Toolbar
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			toolbar.setElevation(getResources().getDimension(R.dimen.ActionBar_elevation));
+		}
 		setSupportActionBar(toolbar);
 
 		// Fix status bar
@@ -83,13 +83,17 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 				boolean closeDrawer = true;
 				switch (menuItem.getItemId()) {
 					case R.id.drawer_item_mediator:
-						fragMan.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-						fragMan.beginTransaction().replace(R.id.fragment_container, new MediatorFrag()).commit();
+						menuItem.setChecked(true);
+						if (getSupportActionBar() != null)
+							getSupportActionBar().setTitle(R.string.app_name);
+						openMediator(null, false);
 						fragMan.executePendingTransactions();
 						break;
 					case R.id.drawer_item_report_card:
-						fragMan.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-						fragMan.beginTransaction().replace(R.id.fragment_container, new ReportCardFrag()).commit();
+						if (getSupportActionBar() != null)
+							getSupportActionBar().setTitle(R.string.report_card_title);
+						menuItem.setChecked(true);
+						openReportCard(false);
 						fragMan.executePendingTransactions();
 						break;
 
@@ -198,7 +202,43 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SubjectFrag.newInstance(index)).addToBackStack(null).commit();
 	}
 
-	public void openMediator(Subject subject) {
-		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, MediatorFrag.newInstance(subject)).addToBackStack(null).commit();
+	public void openMediator(@Nullable Subject subject, boolean addToBackStack) {
+		MediatorFrag f;
+		if (subject != null) f = MediatorFrag.newInstance(subject);
+		else f = new MediatorFrag();
+
+		if (addToBackStack) {
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
+		}
+		else {
+			getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+		}
+
+	}
+
+	@SuppressWarnings("SameParameterValue")
+	public void openReportCard(boolean addToBackStack) {
+		if (addToBackStack) {
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReportCardFrag()).addToBackStack(null).commit();
+		}
+		else {
+			getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReportCardFrag()).commit();
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+		boolean suppress = false;
+		if (f == null) suppress = false;
+		else if (f instanceof MediatorFrag) {
+			suppress = ((MediatorFrag) f).onBackPressed();
+		}
+		else if (f instanceof SubjectFrag) {
+			suppress = ((SubjectFrag) f).onBackPressed();
+		}
+		if (!suppress) super.onBackPressed();
 	}
 }

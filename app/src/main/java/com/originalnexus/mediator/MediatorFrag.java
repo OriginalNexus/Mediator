@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -226,8 +227,10 @@ public class MediatorFrag extends Fragment {
 
 			// Set average text and visibility
 			if (!grades.isEmpty()) {
+				DecimalFormat df = new DecimalFormat("0.00");
 				double average = GradeCalc.average(grades, thesis);
-				((TextView) getView().findViewById(R.id.average_text_view)).setText(Double.toString(average));
+				((TextView) getView().findViewById(R.id.average_text_view)).setText("(" + df.format(average) + ")");
+				((TextView) getView().findViewById(R.id.average_round_text_view)).setText(Integer.toString(GradeCalc.roundAverage(average)));
 				getView().findViewById(R.id.average_container).setVisibility(View.VISIBLE);
 			}
 			else {
@@ -333,6 +336,16 @@ public class MediatorFrag extends Fragment {
 			v.setFocusableInTouchMode(false);
 			activeInputFieldId = viewId;
 		}
+	}
+
+	/**
+	 * Call this to handle keyboard on back press
+	 * @return Whether the keyboard was hid or not
+	 */
+	public boolean onBackPressed() {
+		if (keypad.isKeypadHidden()) return false;
+		keypad.toggleKeypad(0);
+		return true;
 	}
 
 	@Nullable

@@ -63,6 +63,7 @@ public class ReportCardFrag extends Fragment {
 			sAdapter.saveSubjects();
 			recyclerView.setAdapter(sAdapter);
 		}
+
 	}
 
 	@Override

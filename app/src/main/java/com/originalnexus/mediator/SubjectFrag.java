@@ -1,14 +1,20 @@
 package com.originalnexus.mediator;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -198,7 +204,7 @@ public class SubjectFrag extends Fragment {
 					else if (v.getId() == R.id.sub_frag_mediator_btn) {
 						// Send info to mediator and open it
 						MainActivity m = MainActivity.getInstance();
-						if (m != null) m.openMediator(s);
+						if (m != null) m.openMediator(s, true);
 					}
 				}
 			};
@@ -233,8 +239,10 @@ public class SubjectFrag extends Fragment {
 
 			// Set average text and visibility
 			if (!s.grades.isEmpty()) {
+				DecimalFormat df = new DecimalFormat("0.00");
 				double average = GradeCalc.average(s.grades, s.thesis);
-				((TextView) getView().findViewById(R.id.sub_frag_average)).setText(Double.toString(average));
+				((TextView) getView().findViewById(R.id.sub_frag_average)).setText("(" + df.format(average) + ")");
+				((TextView) getView().findViewById(R.id.sub_frag_average_round)).setText(Integer.toString(GradeCalc.roundAverage(average)));
 			}
 			else {
 				((TextView) getView().findViewById(R.id.sub_frag_average)).setText("");
@@ -284,6 +292,54 @@ public class SubjectFrag extends Fragment {
 			sIndex = savedInstanceState.getInt(STATE_INDEX);
 			activeInputFieldId = savedInstanceState.getInt(STATE_INPUT_FIELD);
 		}
+		setHasOptionsMenu(true);
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.subject, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.menu_delete) {
+			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					switch (which){
+						case DialogInterface.BUTTON_POSITIVE:
+							// Delete element
+							sAdapter.removeSubject(sIndex);
+							MainActivity m = MainActivity.getInstance();
+							if (m != null) {
+								m.openReportCard(false);
+							}
+							break;
+
+						case DialogInterface.BUTTON_NEGATIVE:
+							dialog.cancel();
+							break;
+					}
+				}
+			};
+
+			AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+			b.setMessage("Ștergeți \"" + s.name + "\"?")
+					.setPositiveButton("Da", dialogClickListener)
+					.setNegativeButton("Nu", dialogClickListener)
+					.create()
+					.show();
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * Call this to handle keyboard on back press
+	 * @return Whether the keyboard was hid or not
+	 */
+	public boolean onBackPressed() {
+		if (keypad.isKeypadHidden()) return false;
+		keypad.toggleKeypad(0);
+		return true;
+	}
 }
