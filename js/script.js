@@ -1,7 +1,7 @@
 
-var VERSION = "1.1.0"
-var VERSION_DISPLAY = "Mediator v1.1.0"
-var FILE_PATH = "./download/Mediator_v1.1.0.apk"
+var VERSION = "1.2.0"
+var VERSION_DISPLAY = "Mediator v1.2.0"
+var FILE_PATH = "./download/Mediator_v1.2.0.apk"
 
 function update() {
 	var btns = document.getElementsByClassName("dl-btn")
