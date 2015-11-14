@@ -96,7 +96,7 @@ public class KeypadView extends LinearLayout {
 		getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
 			@Override
 			public boolean onPreDraw() {
-				// After the view is ready to be shown we can get it's exact sizes and then hide it
+				// After the view is ready to be shown we can get its exact dimensions and then hide it
 				for (int i = 0; i < getChildCount(); i++) {
 					View child = getChildAt(i);
 					// Makes the buttons keep their size
@@ -104,11 +104,14 @@ public class KeypadView extends LinearLayout {
 				}
 				// Remove this listener
 				getViewTreeObserver().removeOnPreDrawListener(this);
+
 				// Exact size
-				maxHeight = getHeight();
-				maxWidth = getWidth();
+				maxHeight = getHeight(); setHeight(maxHeight);
+				maxWidth = getWidth(); setWidth(maxWidth);
+
 				// Remove weight
 				((LayoutParams) getLayoutParams()).weight = 0;
+
 				// Restore visibility
 				toggleKeypad(isHidden ? 0 : 1);
 
@@ -132,6 +135,7 @@ public class KeypadView extends LinearLayout {
 			if (btnView != null) {
 				// Type of the button
 				KeypadBtnType btnType;
+
 				// Digit if available
 				int digit = 0;
 				if (i == 10) btnType = KeypadBtnType.REMOVE;
@@ -249,7 +253,7 @@ public class KeypadView extends LinearLayout {
 			else isHidden = !isHidden;
 
 		// If the keypad needs to be hid
-		if (isHidden && getVisibility() == VISIBLE) {
+		if (isHidden && getVisibility() != GONE) {
 			if (hideAnim != null) {
 				// Start animation
 				hideAnim.start();

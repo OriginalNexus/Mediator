@@ -1,11 +1,9 @@
-package com.originalnexus.mediator;
+package com.originalnexus.mediator.fragments;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,12 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
+import com.originalnexus.mediator.dialogs.DeleteDialog;
+import com.originalnexus.mediator.dialogs.NameDialog;
+import com.originalnexus.mediator.GradeCalc;
+import com.originalnexus.mediator.KeypadView;
+import com.originalnexus.mediator.activities.MainActivity;
+import com.originalnexus.mediator.R;
+import com.originalnexus.mediator.Subject;
+import com.originalnexus.mediator.SubjectAdapter;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SubjectFrag extends Fragment {
-
 
 	private static final int LONG_PRESS_REMOVE_DELAY = 100;
 
@@ -49,7 +54,7 @@ public class SubjectFrag extends Fragment {
 	 * 	Create a new SubjectFrag
 	 *  @param index index of the subject to display, edit
  	 */
-	static SubjectFrag newInstance(int index) {
+	public static SubjectFrag newInstance(int index) {
 		SubjectFrag frag = new SubjectFrag();
 		frag.sIndex = index;
 		return frag;
@@ -124,9 +129,10 @@ public class SubjectFrag extends Fragment {
 								@Override
 								public void run() {
 									// Check to see if button is still pressed
-									if (!e.sender.isPressed()) {
+									if (!e.sender.isPressed() || getActivity() == null) {
 										timer.cancel();
 										timer.purge();
+										return;
 									}
 
 									// Delete one grade
@@ -154,9 +160,10 @@ public class SubjectFrag extends Fragment {
 								@Override
 								public void run() {
 									// Check to see if button is still pressed
-									if (!e.sender.isPressed()) {
+									if (!e.sender.isPressed() || getActivity() == null) {
 										timer.cancel();
 										timer.purge();
+										return;
 									}
 
 									// Add to grades array
@@ -221,8 +228,7 @@ public class SubjectFrag extends Fragment {
 	/**
 	 * Updates the text views
 	 */
-	@SuppressWarnings("WeakerAccess")
-	void updateViews() {
+	public void updateViews() {
 		if (getView() != null) {
 			// Set grades input field
 			TextView outTV = (TextView) getView().findViewById(R.id.sub_frag_grades);
@@ -234,18 +240,17 @@ public class SubjectFrag extends Fragment {
 			outTV.setText(outStr);
 
 			// Set thesis input field
-			if (s.thesis != 0) ((TextView) getView().findViewById(R.id.sub_frag_thesis)).setText(Integer.toString(s.thesis));
-			else ((TextView) getView().findViewById(R.id.sub_frag_thesis)).setText("");
+			((TextView) getView().findViewById(R.id.sub_frag_thesis)).setText((s.thesis != 0) ? String.format("%d", s.thesis) : "");
 
 			// Set average text and visibility
 			if (!s.grades.isEmpty()) {
-				DecimalFormat df = new DecimalFormat("0.00");
 				double average = GradeCalc.average(s.grades, s.thesis);
-				((TextView) getView().findViewById(R.id.sub_frag_average)).setText("(" + df.format(average) + ")");
-				((TextView) getView().findViewById(R.id.sub_frag_average_round)).setText(Integer.toString(GradeCalc.roundAverage(average)));
+				((TextView) getView().findViewById(R.id.sub_frag_average)).setText(String.format("(%.2f)", GradeCalc.floorDecimals(average)));
+				((TextView) getView().findViewById(R.id.sub_frag_average_round)).setText(String.format("%d", GradeCalc.roundAverage(average)));
 			}
 			else {
 				((TextView) getView().findViewById(R.id.sub_frag_average)).setText("");
+				((TextView) getView().findViewById(R.id.sub_frag_average_round)).setText("");
 			}
 
 			// Set name text
@@ -254,6 +259,9 @@ public class SubjectFrag extends Fragment {
 			// Focus field
 			focusField(activeInputFieldId);
 		}
+
+		// Also save subjects
+		sAdapter.saveSubjects();
 	}
 
 	/**
@@ -303,32 +311,8 @@ public class SubjectFrag extends Fragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.menu_delete) {
-			DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					switch (which){
-						case DialogInterface.BUTTON_POSITIVE:
-							// Delete element
-							sAdapter.removeSubject(sIndex);
-							MainActivity m = MainActivity.getInstance();
-							if (m != null) {
-								m.openReportCard(false);
-							}
-							break;
-
-						case DialogInterface.BUTTON_NEGATIVE:
-							dialog.cancel();
-							break;
-					}
-				}
-			};
-
-			AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-			b.setMessage("Ștergeți \"" + s.name + "\"?")
-					.setPositiveButton("Da", dialogClickListener)
-					.setNegativeButton("Nu", dialogClickListener)
-					.create()
-					.show();
+			DeleteDialog f = DeleteDialog.newInstance(sIndex);
+			f.show(getChildFragmentManager(), null);
 		}
 		return super.onOptionsItemSelected(item);
 	}

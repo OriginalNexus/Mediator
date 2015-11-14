@@ -28,11 +28,13 @@
 	<color name="colorPrimary">#3F51B5</color>
 	<color name="colorPrimaryDark">#303F9F</color>
 
+	<color name="background_light">#FAFAFA</color>
+	<color name="background_dark">#303030</color>
 	<color name="text_light">#101010</color>
 	<color name="text_dark">#efefef</color>
 
-	<color name="drawer_header_text_background_light">#ccffffff</color>
-	<color name="drawer_header_text_background_dark">#cc373737</color>
+	<color name="drawer_header_background_light">#ccffffff</color>
+	<color name="drawer_header_background_dark">#cc373737</color>
 
 
 	<color name="grades_card_over_light">#ff007d00</color>
@@ -45,5 +47,8 @@
 	<color name="subject_header_color_dark">#000</color>
 
 	<color name="ripple">#5C6BC0</color>
+
+	<color name="separator_light">#ff6d6d6d</color>
+	<color name="separator_dark">#9b9b9b</color>
 
 </resources>

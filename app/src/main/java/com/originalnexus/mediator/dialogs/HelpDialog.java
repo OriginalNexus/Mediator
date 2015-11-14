@@ -1,4 +1,4 @@
-package com.originalnexus.mediator;
+package com.originalnexus.mediator.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,8 +7,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.originalnexus.mediator.R;
 
 /**
  * Help Dialog
@@ -28,9 +31,10 @@ public class HelpDialog extends DialogFragment {
 		TextView message = new TextView(getActivity());
 		message.setText(R.string.help_dialog_content);
 		message.setTextSize(14);
+
 		// On android level < 11 background of dialog is always black so we make the text white
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			message.setTextColor(getResources().getColor(R.color.text_dark));
+			message.setTextColor(ContextCompat.getColor(getContext(), R.color.text_dark));
 		}
 
 		ScrollView rootView = new ScrollView(getActivity());

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.originalnexus.mediator.activities.MainActivity;
 
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -21,7 +22,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 		final TextView thesisView;
 		final TextView averageView;
 		final TextView thesisTextView;
-		int index;
+		public int index;
 
 		SubjectViewHolder(View v) {
 			super(v);
@@ -37,15 +38,10 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 
 	private static final String SAVE_SUBJECTS = "subjects";
 
-	ArrayList<Subject> subjects;
+	public ArrayList<Subject> subjects;
 
-	SubjectAdapter() {
+	public SubjectAdapter() {
 		this.subjects = new ArrayList<>();
-	}
-
-	@SuppressWarnings("unused")
-	SubjectAdapter(ArrayList<Subject> subjects) {
-		this.subjects = subjects;
 	}
 
 	public interface ItemClickListener extends EventListener {
@@ -80,18 +76,19 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 		Subject s = subjects.get(i);
 		subjectViewHolder.index = i;
 		subjectViewHolder.nameView.setText(s.name);
-		if (s.grades.size() > 0)
-			subjectViewHolder.gradesView.setText(GradeCalc.arrayListToString(s.grades));
-		if (s.thesis != 0)
-			subjectViewHolder.thesisView.setText(Integer.toString(s.thesis));
+		subjectViewHolder.gradesView.setText((s.grades.size() > 0) ? GradeCalc.arrayListToString(s.grades) : "");
+		if (s.thesis != 0) {
+			subjectViewHolder.thesisTextView.setVisibility(View.VISIBLE);
+			subjectViewHolder.thesisView.setText(String.format("%d", s.thesis));
+		}
 		else {
 			subjectViewHolder.thesisTextView.setVisibility(View.GONE);
+			subjectViewHolder.thesisView.setText("");
 		}
 
 		// Get average
 		double average = GradeCalc.average(s.grades, s.thesis);
-		if (average != 0)
-			subjectViewHolder.averageView.setText(Double.toString(average));
+		subjectViewHolder.averageView.setText((average != 0) ? String.format("%.2f", average) : "");
 	}
 
 	/**
@@ -101,17 +98,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 	public void addSubject(Subject sub) {
 		subjects.add(sub);
 		notifyItemInserted(getItemCount() - 1);
-	}
-
-	/**
-	 * Add a subject at the specified position
-	 * @param sub The subject to be added
-	 * @param pos Position where the subject should be inserted
-	 */
-	@SuppressWarnings("unused")
-	public void addSubject(Subject sub, int pos) {
-		subjects.add(pos, sub);
-		notifyItemInserted(pos);
 	}
 
 	public void removeSubject(int index) {

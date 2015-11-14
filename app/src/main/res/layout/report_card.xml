@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-	android:id="@+id/coordinator"
+<FrameLayout
+	android:id="@+id/report_card_container"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -22,4 +22,4 @@
 		fab:fab_colorPressed="@color/colorPrimaryDark"
 		fab:fab_colorRipple="@color/ripple" />
 
-</android.support.design.widget.CoordinatorLayout>
+</FrameLayout>

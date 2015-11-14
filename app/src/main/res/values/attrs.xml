@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<attr name="keypad_btn_background" format="reference" />
-	<attr name="container_card_background" format="reference" />
+	<attr name="card_background" format="color" />
+	<attr name="card_border" format="color" />
+
+	<attr name="keypad_border" format="color" />
+	<attr name="keypad_top" format="color" />
+	<attr name="keypad_bottom" format="color" />
+
+	<attr name="keypad_pressed_border" format="color" />
+	<attr name="keypad_pressed_top" format="color" />
+	<attr name="keypad_pressed_bottom" format="color" />
+
+	<attr name="drawer_header_background" format="color" />
+
 	<attr name="action_bar_theme" format="reference" />
-	<attr name="drawer_header_text_background" format="color" />
+
 	<attr name="grades_card_over" format="color" />
 	<attr name="grades_card_under" format="color" />
+
 	<attr name="subject_header_color" format="color" />
 	<attr name="background_main" format="color" />
 	<attr name="separator_color" format="color" />

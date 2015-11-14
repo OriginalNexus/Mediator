@@ -4,18 +4,26 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
-class Subject {
-	String name;
-	final ArrayList<Integer> grades;
-	int thesis;
+public class Subject {
+	public String name;
+	public final ArrayList<Integer> grades;
+	public int thesis;
 
-	Subject (String name) {
-		this.name = name;
+	/**
+	 * Creates a new Subject with the given name
+	 * @param name Name of the new Subject
+	 */
+	public Subject (String name) {
+		this.name = (name == null) ? "" : name;
 		this.grades = new ArrayList<>();
 		this.thesis = 0;
 	}
 
-	Subject(@Nullable Subject s) {
+	/**
+	 * Creates a new Subject from an existing one.
+	 * @param s The Subject to copy the values from or null
+	 */
+	public Subject(@Nullable Subject s) {
 		if (s == null) {
 			this.name = "";
 			this.grades = new ArrayList<>();
@@ -27,10 +35,4 @@ class Subject {
 		this.thesis = s.thesis;
 	}
 
-	@SuppressWarnings("unused")
-	Subject (String name, ArrayList<Integer> grades, int thesis) {
-		this.name = name;
-		this.grades = grades;
-		this.thesis = thesis;
-	}
 }

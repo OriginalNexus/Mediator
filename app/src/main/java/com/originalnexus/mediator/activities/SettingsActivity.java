@@ -1,4 +1,4 @@
-package com.originalnexus.mediator;
+package com.originalnexus.mediator.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+
+import com.originalnexus.mediator.R;
 
 
 /**
@@ -21,10 +23,10 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 		String themeValue = settings.getString("pref_theme", "light");
 		switch (themeValue) {
 			case "dark":
-				setTheme(R.style.AppTheme_Dark);
+				setTheme(R.style.Mediator_Dark);
 				break;
 			case "light":
-				setTheme(R.style.AppTheme_Light);
+				setTheme(R.style.Mediator_Light);
 				break;
 		}
 

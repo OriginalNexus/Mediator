@@ -1,4 +1,4 @@
-package com.originalnexus.mediator;
+package com.originalnexus.mediator.dialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,6 +13,8 @@ import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+
+import com.originalnexus.mediator.R;
 
 public class NameDialog extends DialogFragment {
 
@@ -108,6 +110,9 @@ public class NameDialog extends DialogFragment {
 				if (mString.equals("") || mString.replaceAll("\\s", "").equals("")) {
 					((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 				}
+
+				// Focus edit text
+				editT.requestFocus();
 
 				// Open keyboard
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

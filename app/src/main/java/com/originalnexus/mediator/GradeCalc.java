@@ -2,7 +2,7 @@ package com.originalnexus.mediator;
 
 import java.util.ArrayList;
 
-class GradeCalc {
+public class GradeCalc {
 
 	private static final double thesisPercent = 0.25;
 	private static final int numOfDecimals = 2;
@@ -105,7 +105,7 @@ class GradeCalc {
 	 * Floor the number to numOfDecimals decimals
 	 * @param d The number to be floored
 	 */
-	private static double floorDecimals(double d) {
+	public static double floorDecimals(double d) {
 		return Math.floor(d * Math.pow(10, numOfDecimals)) / Math.pow(10, numOfDecimals);
 	}
 

@@ -1,4 +1,4 @@
-package com.originalnexus.mediator;
+package com.originalnexus.mediator.activities;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -19,7 +19,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements NameDialog.NameDialogListener, ReportCardFrag.ItemClickListener{
+import com.originalnexus.mediator.dialogs.AboutDialog;
+import com.originalnexus.mediator.dialogs.DeleteDialog;
+import com.originalnexus.mediator.dialogs.HelpDialog;
+import com.originalnexus.mediator.dialogs.NameDialog;
+import com.originalnexus.mediator.fragments.MediatorFrag;
+import com.originalnexus.mediator.fragments.ReportCardFrag;
+import com.originalnexus.mediator.fragments.SubjectFrag;
+import com.originalnexus.mediator.R;
+import com.originalnexus.mediator.Subject;
+
+public class MainActivity extends AppCompatActivity implements NameDialog.NameDialogListener, ReportCardFrag.SubjectClickListener, DeleteDialog.DeleteDialogListener{
 
 	// Singleton
 	private static MainActivity instance = null;
@@ -45,10 +55,10 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 		String themeValue = settings.getString("pref_theme", "light");
 		switch (themeValue) {
 			case "dark" :
-				setTheme(R.style.AppTheme_Dark);
+				setTheme(R.style.Mediator_Dark);
 				break;
 			case "light" :
-				setTheme(R.style.AppTheme_Light);
+				setTheme(R.style.Mediator_Light);
 				break;
 		}
 
@@ -93,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 						if (getSupportActionBar() != null)
 							getSupportActionBar().setTitle(R.string.report_card_title);
 						menuItem.setChecked(true);
-						openReportCard(false);
+						openReportCard();
 						fragMan.executePendingTransactions();
 						break;
 
@@ -198,8 +208,15 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 	}
 
 	@Override
-	public void onItemClick(int index) {
+	public void onSubjectClick(int index) {
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SubjectFrag.newInstance(index)).addToBackStack(null).commit();
+	}
+
+	@Override
+	public void onDeleteSubject(int index) {
+		SubjectFrag.sAdapter.removeSubject(index);
+		ReportCardFrag.sAdapter.saveSubjects();
+		openReportCard();
 	}
 
 	public void openMediator(@Nullable Subject subject, boolean addToBackStack) {
@@ -217,15 +234,9 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 
 	}
 
-	@SuppressWarnings("SameParameterValue")
-	public void openReportCard(boolean addToBackStack) {
-		if (addToBackStack) {
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReportCardFrag()).addToBackStack(null).commit();
-		}
-		else {
-			getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReportCardFrag()).commit();
-		}
+	private void openReportCard() {
+		getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReportCardFrag()).commit();
 	}
 
 	@Override
@@ -241,4 +252,5 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 		}
 		if (!suppress) super.onBackPressed();
 	}
+
 }

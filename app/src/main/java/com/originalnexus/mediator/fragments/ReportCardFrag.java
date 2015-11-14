@@ -1,6 +1,6 @@
-package com.originalnexus.mediator;
+package com.originalnexus.mediator.fragments;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.originalnexus.mediator.dialogs.NameDialog;
+import com.originalnexus.mediator.R;
+import com.originalnexus.mediator.SubjectAdapter;
 
 
 public class ReportCardFrag extends Fragment {
@@ -18,11 +21,11 @@ public class ReportCardFrag extends Fragment {
 	public static SubjectAdapter sAdapter = null;
 	public static final int DIALOG_REQ_CODE = 2;
 
-	public interface ItemClickListener {
-		void onItemClick(int index);
+	public interface SubjectClickListener {
+		void onSubjectClick(int index);
 	}
 
-	private static ItemClickListener mCaller;
+	private static SubjectClickListener mCaller;
 
 	@Nullable
 	@Override
@@ -53,7 +56,7 @@ public class ReportCardFrag extends Fragment {
 				sAdapter.setItemClickListener(new SubjectAdapter.ItemClickListener() {
 					@Override
 					public void onClick(SubjectAdapter.SubjectViewHolder subjectViewHolder) {
-						mCaller.onItemClick(subjectViewHolder.index);
+						mCaller.onSubjectClick(subjectViewHolder.index);
 					}
 				});
 
@@ -67,13 +70,13 @@ public class ReportCardFrag extends Fragment {
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+	public void onAttach(Context context) {
+		super.onAttach(context);
 		try {
-			mCaller = (ItemClickListener) activity;
+			mCaller = (SubjectClickListener) context;
 		}
 		catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement ItemClickListener.");
+			throw new ClassCastException(context.toString() + " must implement SubjectClickListener.");
 		}
 	}
 }

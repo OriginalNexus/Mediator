@@ -1,4 +1,4 @@
-package com.originalnexus.mediator;
+package com.originalnexus.mediator.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
+import com.originalnexus.mediator.GradeCalc;
+import com.originalnexus.mediator.KeypadView;
+import com.originalnexus.mediator.R;
+import com.originalnexus.mediator.Subject;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -110,9 +114,10 @@ public class MediatorFrag extends Fragment {
 								@Override
 								public void run() {
 									// Check to see if button is still pressed
-									if (!e.sender.isPressed()) {
+									if (!e.sender.isPressed() || getActivity() == null) {
 										timer.cancel();
 										timer.purge();
+										return;
 									}
 
 									// Delete one grade
@@ -140,9 +145,10 @@ public class MediatorFrag extends Fragment {
 								@Override
 								public void run() {
 									// Check to see if button is still pressed
-									if (!e.sender.isPressed()) {
+									if (!e.sender.isPressed() || getActivity() == null) {
 										timer.cancel();
 										timer.purge();
+										return;
 									}
 
 									// Add to grades array
@@ -213,24 +219,22 @@ public class MediatorFrag extends Fragment {
 	}
 
 	/**
-	 * Updates the text views
+	 * Updates all views
 	 */
-	@SuppressWarnings("WeakerAccess")
-	void updateViews() {
+	private void updateViews() {
 		if (getView() != null) {
 			// Set grades input field
 			((TextView) getView().findViewById(R.id.grades_input_field)).setText(GradeCalc.arrayListToString(grades));
 
 			// Set thesis input field
-			if (thesis != 0) ((TextView) getView().findViewById(R.id.thesis_input_field)).setText(Integer.toString(thesis));
+			if (thesis != 0) ((TextView) getView().findViewById(R.id.thesis_input_field)).setText(String.format("%d", thesis));
 			else ((TextView) getView().findViewById(R.id.thesis_input_field)).setText("");
 
 			// Set average text and visibility
 			if (!grades.isEmpty()) {
-				DecimalFormat df = new DecimalFormat("0.00");
 				double average = GradeCalc.average(grades, thesis);
-				((TextView) getView().findViewById(R.id.average_text_view)).setText("(" + df.format(average) + ")");
-				((TextView) getView().findViewById(R.id.average_round_text_view)).setText(Integer.toString(GradeCalc.roundAverage(average)));
+				((TextView) getView().findViewById(R.id.average_text_view)).setText(String.format("(%.2f)", GradeCalc.floorDecimals(average)));
+				((TextView) getView().findViewById(R.id.average_round_text_view)).setText(String.format("%d", GradeCalc.roundAverage(average)));
 				getView().findViewById(R.id.average_container).setVisibility(View.VISIBLE);
 			}
 			else {
@@ -238,7 +242,7 @@ public class MediatorFrag extends Fragment {
 			}
 
 			// Set extra grades
-			((TextView) getView().findViewById(R.id.extra_grades_input_field)).setText(Integer.toString((extraGrades)));
+			((TextView) getView().findViewById(R.id.extra_grades_input_field)).setText(String.format("%d", extraGrades));
 
 			// Update grades cards
 			if (extraGrades <= 0) {
@@ -260,7 +264,7 @@ public class MediatorFrag extends Fragment {
 	private void createGradeCards() {
 		FragmentTransaction fragTrans = getChildFragmentManager().beginTransaction();
 		for (int i = 1; i <= 10; i++) {
-			fragTrans.add(R.id.grades_card_fragments_container, new GradesCard(), gradesCardTagPrefix + i);
+			fragTrans.add(R.id.grades_card_fragments_container, new GradesCardFrag(), gradesCardTagPrefix + i);
 		}
 		fragTrans.commit();
 		getChildFragmentManager().executePendingTransactions();
@@ -274,7 +278,7 @@ public class MediatorFrag extends Fragment {
 		boolean[] cardIsVisible = new boolean[10];
 
 		for (int i = 1; i <= 10; i++) {
-			GradesCard f = (GradesCard) fragMan.findFragmentByTag(gradesCardTagPrefix + i);
+			GradesCardFrag f = (GradesCardFrag) fragMan.findFragmentByTag(gradesCardTagPrefix + i);
 			if (f == null) continue;
 
 			if (extraGrades <= 0) {
@@ -286,14 +290,14 @@ public class MediatorFrag extends Fragment {
 				cardIsVisible[i - 1] = true;
 				if (i > 1) {
 					// Previous card
-					GradesCard prev = (GradesCard) fragMan.findFragmentByTag(gradesCardTagPrefix + (i - 1));
+					GradesCardFrag prev = (GradesCardFrag) fragMan.findFragmentByTag(gradesCardTagPrefix + (i - 1));
 					if (prev == null) continue;
 
 					// Hide useless cards
-					if (prev.getState() == GradesCard.GradesCardState.OVER && f.getState() == prev.getState()) {
+					if (prev.getState() == GradesCardFrag.GradesCardState.OVER && f.getState() == prev.getState()) {
 						cardIsVisible[i - 2] = false;
 					}
-					else if (prev.getState() == GradesCard.GradesCardState.UNDER) {
+					else if (prev.getState() == GradesCardFrag.GradesCardState.UNDER) {
 						cardIsVisible[i - 1] = false;
 					}
 				}
@@ -303,11 +307,11 @@ public class MediatorFrag extends Fragment {
 		cardIsVisible[0] = false;
 		FragmentTransaction fragTrans = fragMan.beginTransaction();
 		for (int i = 1; i <= 10; i++) {
-			GradesCard f = (GradesCard) fragMan.findFragmentByTag(gradesCardTagPrefix + i);
+			GradesCardFrag f = (GradesCardFrag) fragMan.findFragmentByTag(gradesCardTagPrefix + i);
 			if (f == null) continue;
 
 			if (cardIsVisible[i - 1]) {
-				if (!f.started) f.startHidden = false;
+				if (!f.created) f.startHidden = false;
 				else {
 					if (f.isHidden()) {
 						fragTrans.show(f);
@@ -316,7 +320,7 @@ public class MediatorFrag extends Fragment {
 				}
 			}
 			else if (!cardIsVisible[i - 1])
-				if (!f.started) f.startHidden = true;
+				if (!f.created) f.startHidden = true;
 				else if (f.isVisible())
 					fragTrans.hide(f);
 		}

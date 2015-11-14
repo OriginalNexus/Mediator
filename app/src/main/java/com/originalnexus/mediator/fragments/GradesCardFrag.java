@@ -1,6 +1,7 @@
-package com.originalnexus.mediator;
+package com.originalnexus.mediator.fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,17 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.originalnexus.mediator.GradeCalc;
+import com.originalnexus.mediator.R;
+
 import java.util.ArrayList;
 
 
-public class GradesCard extends Fragment {
+public class GradesCardFrag extends Fragment {
 
 	private ArrayList<Integer> grades = null;
 	private int thesis = 0;
 	private int extra = 0;
 	private int finalAvg = 5;
 
-	public boolean started = false;
+	public boolean created = false;
 	public boolean startHidden = true;
 
 	private GradesCardState state = GradesCardState.INVALID;
@@ -55,9 +59,9 @@ public class GradesCard extends Fragment {
 	public void updateViews() {
 		if (getView() != null) {
 			// Set average view
-			((TextView) getView().findViewById(R.id.gradesCardFAverage)).setText(Integer.toString(finalAvg));
+			((TextView) getView().findViewById(R.id.gradesCardFragAverage)).setText(String.format("%d", finalAvg));
 
-			TextView outText = (TextView) getView().findViewById(R.id.gradesCardFOutput);
+			TextView outText = (TextView) getView().findViewById(R.id.gradesCardFragOutput);
 
 			switch (state) {
 				case INVALID:
@@ -67,16 +71,28 @@ public class GradesCard extends Fragment {
 				case UNDER:
 					// Gets under given average
 					outText.setText(getResources().getString(R.string.grades_card_under));
-					outText.setTextAppearance(getActivity(), R.style.GradesCard_Under);
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+						//noinspection deprecation
+						outText.setTextAppearance(getActivity(), R.style.GradesCard_Under);
+					else
+						outText.setTextAppearance(R.style.GradesCard_Under);
 					break;
 				case OVER:
 					// Gets over given average
 					outText.setText(getResources().getString(R.string.grades_card_over));
-					outText.setTextAppearance(getActivity(), R.style.GradesCard_Over);
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+						//noinspection deprecation
+						outText.setTextAppearance(getActivity(), R.style.GradesCard_Over);
+					else
+						outText.setTextAppearance(R.style.GradesCard_Over);
 					break;
 				case VALID:
 					// Can get given average
-					outText.setTextAppearance(getActivity(), R.style.GradesCard_Middle);
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+						//noinspection deprecation
+						outText.setTextAppearance(getActivity(), R.style.GradesCard_Middle);
+					else
+						outText.setTextAppearance(R.style.GradesCard_Middle);
 					ArrayList<Integer> result = GradeCalc.calculateRequiredGrades(grades, thesis, extra, finalAvg);
 					outText.setText(GradeCalc.arrayListToString(result));
 					break;
@@ -105,7 +121,7 @@ public class GradesCard extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		if (startHidden) getFragmentManager().beginTransaction().hide(this).commit();
 		updateViews();
-		started = true;
+		created = true;
 	}
 
 	/**

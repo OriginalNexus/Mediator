@@ -45,7 +45,7 @@
 	<string name="help_dialog_button">Am înțeles</string>
 	<string name="about_dialog_title">Despre</string>
 	<string name="about_dialog_content">
-		&lt;h1&gt;Mediator {version}&lt;/h1&gt;
+		&lt;h1&gt;Mediator %s&lt;/h1&gt;
 		&lt;p&gt;
 			&lt;a href="http://originalnexus.github.io/Mediator/"&gt;Site oficial&lt;/a&gt;
 		&lt;/p&gt;
@@ -64,7 +64,7 @@
 			&lt;a href="https://www.facebook.com/neacsu.razvan.75"&gt;Facebook&lt;/a&gt;
 		&lt;/p&gt;
 		&lt;p&gt;
-			&lt;a href="https://plus.google.com/114989395056130155654/"&gt;Google+&lt;/a&gt;
+			&lt;a href="https://plus.google.com/+RazvanNeacsuNexus/"&gt;Google+&lt;/a&gt;
 		&lt;/p&gt;
 		&lt;p&gt;
 			&lt;a href="https://github.com/OriginalNexus/"&gt;Github&lt;/a&gt;
@@ -97,5 +97,8 @@
 	<string name="report_card_title">Carnet de note</string>
 	<string name="menu_delete">Șterge</string>
 	<string name="subject_item_grades_hint">Nici o notă</string>
+	<string name="answer_yes">Da</string>
+	<string name="answer_no">Nu</string>
+	<string name="delete_dialog_text">Ștergeți \"%s\"?</string>
 
 </resources>
