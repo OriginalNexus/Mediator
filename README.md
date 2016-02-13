@@ -33,7 +33,7 @@ De asemenea putem găsi link-uri și alte informații la secțiunea **Despre**.
 
 ## Elevi
 
-Aplicația are ca scop să ușureze acest calcul al mediilor. Astfel putem renunța la calculatorul obișnuit (de buzunar sau din telefon) folosit de marea majoritatea a elevilor. Aceasta are ca avantaj eliminarea erorilor cauzate de utilizator (împărțirea la alt număr de note, nerotunjirea mediei la oral etc.) și o viteză mai mare de calcul.
+Aplicația are ca scop să ușureze acest calcul al mediilor. Astfel putem renunța la calculatorul obișnuit (de buzunar sau din telefon) folosit de marea majoritatea a elevilor. Aceasta are ca avantaj eliminarea erorilor cauzate de utilizator (împărțirea la alt număr de note, rotunjirea greșită a mediei la oral etc.) și o viteză mai mare de calcul.
 
 Pe lângă acestea, folosind **_Note în plus_** elevii pot cunoaște notele minime ce trebuiesc obținute pentru a lua o anumită medie, motivându-i pe elevi să învețe pentru a ajunge la nivelul propus de ei.
 
@@ -102,7 +102,7 @@ Da. Chiar dacă momentan nu e pe Google Play, nu intenționez să o vând sau s�
 
 # Realizator:
 
-Neacșu Răzvan, Colegiul Național ”Nicolae Bălcescu” Brăila. Mă găsești pe [Facebook](https://www.facebook.com/neacsu.razvan.75), [Google+](https://plus.google.com/114989395056130155654) și [Github](https://github.com/OriginalNexus).
+Neacșu Răzvan, Colegiul Național ”Nicolae Bălcescu” Brăila. Mă găsești pe [Facebook](https://www.facebook.com/neacsu.razvan.75), [Google+](https://plus.google.com/114989395056130155654) și [GitHub](https://github.com/OriginalNexus).
 
 # Licență
 

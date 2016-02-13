@@ -13,6 +13,7 @@ import com.originalnexus.mediator.GradeCalc;
 import com.originalnexus.mediator.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class GradesCardFrag extends Fragment {
@@ -59,7 +60,7 @@ public class GradesCardFrag extends Fragment {
 	public void updateViews() {
 		if (getView() != null) {
 			// Set average view
-			((TextView) getView().findViewById(R.id.gradesCardFragAverage)).setText(String.format("%d", finalAvg));
+			((TextView) getView().findViewById(R.id.gradesCardFragAverage)).setText(String.format(Locale.ENGLISH, "%d", finalAvg));
 
 			TextView outText = (TextView) getView().findViewById(R.id.gradesCardFragOutput);
 

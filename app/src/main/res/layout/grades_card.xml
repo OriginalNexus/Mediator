@@ -12,7 +12,7 @@
 	<!-- TODO: Material design tabel in cards-->
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="0.5dp"
+		android:layout_height="@dimen/Separator_thickness"
 		android:background="#ff6d6d6d"
 		android:orientation="horizontal"
 		/>
@@ -36,7 +36,7 @@
 			android:textSize="22sp"/>
 
 		<LinearLayout
-			android:layout_width="0.5dp"
+			android:layout_width="@dimen/Separator_thickness"
 			android:layout_height="match_parent"
 			android:layout_marginLeft="4dp"
 			android:layout_marginRight="4dp"

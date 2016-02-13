@@ -13,6 +13,7 @@ import com.originalnexus.mediator.activities.MainActivity;
 
 import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.Locale;
 
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder> {
 	public class SubjectViewHolder extends RecyclerView.ViewHolder {
@@ -22,7 +23,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 		final TextView thesisView;
 		final TextView averageView;
 		final TextView thesisTextView;
-		public int index;
 
 		SubjectViewHolder(View v) {
 			super(v);
@@ -74,12 +74,11 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 	@Override
 	public void onBindViewHolder(SubjectViewHolder subjectViewHolder, int i) {
 		Subject s = subjects.get(i);
-		subjectViewHolder.index = i;
 		subjectViewHolder.nameView.setText(s.name);
 		subjectViewHolder.gradesView.setText((s.grades.size() > 0) ? GradeCalc.arrayListToString(s.grades) : "");
 		if (s.thesis != 0) {
 			subjectViewHolder.thesisTextView.setVisibility(View.VISIBLE);
-			subjectViewHolder.thesisView.setText(String.format("%d", s.thesis));
+			subjectViewHolder.thesisView.setText(String.format(Locale.ENGLISH, "%d", s.thesis));
 		}
 		else {
 			subjectViewHolder.thesisTextView.setVisibility(View.GONE);
@@ -88,7 +87,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 
 		// Get average
 		double average = GradeCalc.average(s.grades, s.thesis);
-		subjectViewHolder.averageView.setText((average != 0) ? String.format("%.2f", average) : "");
+		subjectViewHolder.averageView.setText((average != 0) ? String.format(Locale.ENGLISH, "%.2f", average) : "");
 	}
 
 	/**

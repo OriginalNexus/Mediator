@@ -25,8 +25,9 @@
 			android:id="@+id/average"
 			android:textSize="20sp"
 			android:layout_gravity="center_vertical"
+			android:layout_marginStart="5dp"
 			android:layout_marginLeft="5dp"
-			android:textStyle="bold"/>
+			android:textStyle="bold" />
 	</LinearLayout>
 
 	<LinearLayout
@@ -58,6 +59,7 @@
 			android:id="@+id/grades"
 			android:layout_weight="1"
 			android:textSize="16sp"
+			android:layout_marginStart="5dp"
 			android:layout_marginLeft="5dp"
 			android:hint="@string/subject_item_grades_hint"/>
 
@@ -68,6 +70,7 @@
 			android:textSize="16sp"
 			android:layout_gravity="center_vertical"
 			android:textStyle="bold"
+			android:layout_marginStart="5dp"
 			android:layout_marginLeft="5dp"
 			android:id="@+id/thesis_text"/>
 
@@ -77,6 +80,7 @@
 			android:id="@+id/thesis"
 			android:textSize="16sp"
 			android:layout_gravity="center_vertical"
+			android:layout_marginStart="5dp"
 			android:layout_marginLeft="5dp"
 			android:minWidth="20dp"
 			android:gravity="center_vertical"/>

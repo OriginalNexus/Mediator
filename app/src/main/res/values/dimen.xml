@@ -3,4 +3,5 @@
 	<dimen name="KeypadView_padding">6dp</dimen>
 	<dimen name="Dialog_padding">16dp</dimen>
 	<dimen name="ActionBar_elevation">4dp</dimen>
+	<dimen name="Separator_thickness">0.5dp</dimen>
 </resources>

@@ -21,6 +21,7 @@ import com.originalnexus.mediator.R;
 import com.originalnexus.mediator.Subject;
 import com.originalnexus.mediator.SubjectAdapter;
 
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -240,13 +241,13 @@ public class SubjectFrag extends Fragment {
 			outTV.setText(outStr);
 
 			// Set thesis input field
-			((TextView) getView().findViewById(R.id.sub_frag_thesis)).setText((s.thesis != 0) ? String.format("%d", s.thesis) : "");
+			((TextView) getView().findViewById(R.id.sub_frag_thesis)).setText((s.thesis != 0) ? String.format(Locale.ENGLISH, "%d", s.thesis) : "");
 
 			// Set average text and visibility
 			if (!s.grades.isEmpty()) {
 				double average = GradeCalc.average(s.grades, s.thesis);
-				((TextView) getView().findViewById(R.id.sub_frag_average)).setText(String.format("(%.2f)", GradeCalc.floorDecimals(average)));
-				((TextView) getView().findViewById(R.id.sub_frag_average_round)).setText(String.format("%d", GradeCalc.roundAverage(average)));
+				((TextView) getView().findViewById(R.id.sub_frag_average)).setText(String.format(Locale.ENGLISH, "(%.2f)", GradeCalc.floorDecimals(average)));
+				((TextView) getView().findViewById(R.id.sub_frag_average_round)).setText(String.format(Locale.ENGLISH, "%d", GradeCalc.roundAverage(average)));
 			}
 			else {
 				((TextView) getView().findViewById(R.id.sub_frag_average)).setText("");

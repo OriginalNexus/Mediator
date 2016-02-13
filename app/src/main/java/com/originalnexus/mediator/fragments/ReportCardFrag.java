@@ -56,7 +56,7 @@ public class ReportCardFrag extends Fragment {
 				sAdapter.setItemClickListener(new SubjectAdapter.ItemClickListener() {
 					@Override
 					public void onClick(SubjectAdapter.SubjectViewHolder subjectViewHolder) {
-						mCaller.onSubjectClick(subjectViewHolder.index);
+						mCaller.onSubjectClick(subjectViewHolder.getAdapterPosition());
 					}
 				});
 
