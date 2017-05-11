@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<dimen name="dialog_padding">16dp</dimen>
+	<dimen name="app_bar_elevation">4dp</dimen>
+	<dimen name="separator_size">1dp</dimen>
+	<dimen name="keypad_size">250dp</dimen>
+	<dimen name="right_column_width">96dp</dimen>
+	<dimen name="hint_right_column_width">68dp</dimen>
+	<dimen name="drag_drop_elevation">6dp</dimen>
+
+</resources>

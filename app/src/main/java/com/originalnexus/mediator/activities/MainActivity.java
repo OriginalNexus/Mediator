@@ -1,163 +1,124 @@
 package com.originalnexus.mediator.activities;
 
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.content.Intent;
+import android.app.FragmentTransaction;
+import android.content.res.Configuration;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.originalnexus.mediator.dialogs.AboutDialog;
-import com.originalnexus.mediator.dialogs.DeleteDialog;
 import com.originalnexus.mediator.dialogs.HelpDialog;
-import com.originalnexus.mediator.dialogs.NameDialog;
 import com.originalnexus.mediator.fragments.MediatorFrag;
 import com.originalnexus.mediator.fragments.ReportCardFrag;
-import com.originalnexus.mediator.fragments.SubjectFrag;
+import com.originalnexus.mediator.fragments.SettingsFrag;
 import com.originalnexus.mediator.R;
-import com.originalnexus.mediator.Subject;
+import com.originalnexus.mediator.fragments.SubjectFrag;
+import com.originalnexus.mediator.models.Subject;
 
-public class MainActivity extends AppCompatActivity implements NameDialog.NameDialogListener, ReportCardFrag.SubjectClickListener, DeleteDialog.DeleteDialogListener{
+public class MainActivity extends AppCompatActivity {
 
-	// Singleton
-	private static MainActivity instance = null;
-	// Drawer toggle for the action bar
-	private ActionBarDrawerToggle drawerToggle;
-
-
-	@Nullable
-	public static MainActivity getInstance() {
-		return instance;
+	public interface BackPressedListener {
+		/**
+		 * Called when back is pressed
+		 * @return Return true if the event was consumed
+		 */
+		boolean onBackPressed();
 	}
+
+	private Toolbar mToolbar;
+	private DrawerLayout mDrawerLayout;
+	private ActionBarDrawerToggle mDrawerToggle;
+	private Runnable mDrawerPendingRunnable;
+	private boolean mCanExitOnBack = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// Singleton
-		instance = this;
-
 		// Set default settings if they are missing
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
 		// Restore theme
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-		String themeValue = settings.getString("pref_theme", "light");
-		switch (themeValue) {
-			case "dark" :
-				setTheme(R.style.Mediator_Dark);
-				break;
-			case "light" :
-				setTheme(R.style.Mediator_Light);
-				break;
-		}
+		boolean useDarkTheme = settings.getBoolean("pref_dark_theme", false);
+		if (useDarkTheme) setTheme(R.style.Mediator_Dark);
+		else setTheme(R.style.Mediator_Light);
 
-		// Call super class
 		super.onCreate(savedInstanceState);
 
 		// Set layout
-		setContentView(R.layout.main);
+		setContentView(R.layout.act_main);
 
 		// Setup Toolbar
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			toolbar.setElevation(getResources().getDimension(R.dimen.ActionBar_elevation));
-		}
-		setSupportActionBar(toolbar);
+		mToolbar = (Toolbar) findViewById(R.id.act_main_toolbar);
+		ViewCompat.setElevation(mToolbar, getResources().getDimension(R.dimen.app_bar_elevation));
+		setSupportActionBar(mToolbar);
 
-		// Fix status bar
+		// Transparent status bar for Lollipop and newer
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 			getWindow().setStatusBarColor(Color.TRANSPARENT);
 		}
 
 		// Setup drawer
-		final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		NavigationView navigationView = (NavigationView) findViewById(R.id.drawer_left);
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.act_main_drawer_layout);
+		NavigationView navigationView = (NavigationView) findViewById(R.id.act_main_navigation);
 
 		navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 			@Override
-			public boolean onNavigationItemSelected(MenuItem menuItem) {
-				// When an item is selected from the navigation drawer
-				FragmentManager fragMan = getSupportFragmentManager();
-				boolean closeDrawer = true;
-				switch (menuItem.getItemId()) {
-					case R.id.drawer_item_mediator:
-						menuItem.setChecked(true);
-						if (getSupportActionBar() != null)
-							getSupportActionBar().setTitle(R.string.app_name);
-						openMediator(null, false);
-						fragMan.executePendingTransactions();
-						break;
-					case R.id.drawer_item_report_card:
-						if (getSupportActionBar() != null)
-							getSupportActionBar().setTitle(R.string.report_card_title);
-						menuItem.setChecked(true);
-						openReportCard();
-						fragMan.executePendingTransactions();
-						break;
-
-					case R.id.drawer_item_settings:
-						// Show app settings
-						Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-						startActivity(intent);
-						break;
-
-					case R.id.drawer_item_help:
-						// Show help dialog
-						DialogFragment helpDialog = new HelpDialog();
-						helpDialog.show(getSupportFragmentManager(), "help_dialog");
-						break;
-
-					case R.id.drawer_item_about:
-						// Show about dialog
-						DialogFragment aboutDialog = new AboutDialog();
-						aboutDialog.show(getSupportFragmentManager(), "about_dialog");
-						break;
-
-					default:
-						closeDrawer = false;
-						break;
-				}
-
-				// Close the drawer
-				if (closeDrawer) drawerLayout.closeDrawers();
-
-				return false;
+			public boolean onNavigationItemSelected(@NonNull final MenuItem menuItem) {
+				mDrawerLayout.closeDrawer(Gravity.START);
+				if (menuItem.isChecked()) return false;
+				mDrawerPendingRunnable = new Runnable() {
+					@Override
+					public void run() {
+						onMenuItemSelected(menuItem);
+					}
+				};
+				return menuItem.isCheckable();
 			}
 		});
+		navigationView.setCheckedItem(0);
 
-		// Add drawer toggle feature to the toolbar
-		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-		drawerLayout.setDrawerListener(drawerToggle);
+		// Add drawer toggle feature to the mToolbar
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close) {
+			@Override
+			public void onDrawerClosed(View drawerView) {
+				super.onDrawerClosed(drawerView);
+				if (mDrawerPendingRunnable != null) {
+					mDrawerPendingRunnable.run();
+					mDrawerPendingRunnable = null;
+				}
+			}
+		};
+		mDrawerLayout.addDrawerListener(mDrawerToggle);
 
-		// Add/Restore fragment
-		if (savedInstanceState == null)
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MediatorFrag()).commit();
-
+		if (savedInstanceState == null) {
+			openMediator();
+		}
 	}
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 		// Sync drawer toggle button state
-		drawerToggle.syncState();
-	}
-
-	@Override
-	public void finish() {
-		instance = null;
-		super.finish();
+		mDrawerToggle.syncState();
 	}
 
 	@Override
@@ -168,89 +129,128 @@ public class MainActivity extends AppCompatActivity implements NameDialog.NameDi
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.menu_help:
-				// Show help dialog
-				DialogFragment helpDialog = new HelpDialog();
-				helpDialog.show(getSupportFragmentManager(), "help_dialog");
-				return true;
-			case R.id.menu_about:
-				// Show about dialog
-				DialogFragment aboutDialog = new AboutDialog();
-				aboutDialog.show(getSupportFragmentManager(), "about_dialog");
-				return true;
-			case R.id.menu_settings:
-				// Show app settings
-				Intent intent = new Intent(this, SettingsActivity.class);
-				startActivity(intent);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
+		return mDrawerToggle.onOptionsItemSelected(item) || onMenuItemSelected(item) || super.onOptionsItemSelected(item);
 	}
 
 	@Override
-	public void onNameDialogConfirm(int requestCode, String input) {
-		switch (requestCode) {
-			case ReportCardFrag.DIALOG_REQ_CODE:
-				Subject s = new Subject(input);
-				ReportCardFrag.sAdapter.addSubject(s);
-				ReportCardFrag.sAdapter.saveSubjects();
-				break;
-			case SubjectFrag.DIALOG_REQ_CODE:
-				SubjectFrag f = SubjectFrag.instance;
-				if (f != null) {
-					f.s.name = input;
-					f.updateViews();
-				}
-				break;
-		}
-	}
-
-	@Override
-	public void onSubjectClick(int index) {
-		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SubjectFrag.newInstance(index)).addToBackStack(null).commit();
-	}
-
-	@Override
-	public void onDeleteSubject(int index) {
-		SubjectFrag.sAdapter.removeSubject(index);
-		ReportCardFrag.sAdapter.saveSubjects();
-		openReportCard();
-	}
-
-	public void openMediator(@Nullable Subject subject, boolean addToBackStack) {
-		MediatorFrag f;
-		if (subject != null) f = MediatorFrag.newInstance(subject);
-		else f = new MediatorFrag();
-
-		if (addToBackStack) {
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
-		}
-		else {
-			getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-		}
-
-	}
-
-	private void openReportCard() {
-		getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReportCardFrag()).commit();
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
 	@Override
 	public void onBackPressed() {
-		Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-		boolean suppress = false;
-		if (f == null) suppress = false;
-		else if (f instanceof MediatorFrag) {
-			suppress = ((MediatorFrag) f).onBackPressed();
+		if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+			mDrawerLayout.closeDrawer(Gravity.START);
+			return;
 		}
-		else if (f instanceof SubjectFrag) {
-			suppress = ((SubjectFrag) f).onBackPressed();
+
+		Fragment f = getFragmentManager().findFragmentById(R.id.act_main_fragment);
+		if ((f instanceof BackPressedListener) && ((BackPressedListener) f).onBackPressed()) return;
+
+		if (getFragmentManager().getBackStackEntryCount() > 0) {
+			super.onBackPressed();
 		}
-		if (!suppress) super.onBackPressed();
+		else if (!mCanExitOnBack) {
+			Toast.makeText(this, R.string.act_main_on_back_pressed, Toast.LENGTH_SHORT).show();
+			mCanExitOnBack = true;
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					mCanExitOnBack = false;
+				}
+			}, 2000);
+		}
+		else {
+			super.onBackPressed();
+		}
+	}
+
+	private boolean onMenuItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_drawer_mediator:
+				openMediator();
+				break;
+			case R.id.menu_drawer_report_card:
+				openReportCard();
+				break;
+			case R.id.menu_drawer_settings:
+			case R.id.menu_main_settings:
+				openSettings();
+				break;
+			case R.id.menu_drawer_help:
+			case R.id.menu_main_help:
+				openHelp();
+				break;
+			case R.id.menu_drawer_about:
+			case R.id.menu_main_about:
+				openAbout();
+				break;
+			default:
+				return false;
+		}
+		return true;
+	}
+
+	private void clearBackStack() {
+		FragmentManager fm = getFragmentManager();
+		int count = fm.getBackStackEntryCount();
+		for (int i = 0; i < count; i++) {
+			fm.popBackStack();
+		}
+	}
+
+	private void openFragment(Fragment f, boolean addToBackStack) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			f.setEnterTransition(new Fade());
+			f.setReturnTransition(null);
+			f.setReenterTransition(new Fade());
+		}
+
+		FragmentTransaction ft = getFragmentManager().beginTransaction().replace(R.id.act_main_fragment, f);
+		if (addToBackStack) ft.addToBackStack(null);
+		else clearBackStack();
+		ft.commit();
+	}
+
+	private void openMediator() {
+		openFragment(new MediatorFrag(), false);
+	}
+
+	public void openMediator(Subject subject) {
+		openFragment(MediatorFrag.newInstance(subject), true);
+	}
+
+	public void openReportCard() {
+		openFragment(new ReportCardFrag(), false);
+	}
+
+	public void openSubject(int index) {
+		openFragment(SubjectFrag.newInstance(index), true);
+	}
+
+	private void openSettings() {
+		if (!(getFragmentManager().findFragmentById(R.id.act_main_fragment) instanceof SettingsFrag)) {
+			openFragment(new SettingsFrag(), true);
+		}
+	}
+
+	private void openHelp() {
+		DialogFragment helpDialog = new HelpDialog();
+		helpDialog.show(getFragmentManager(), null);
+	}
+
+	private void openAbout() {
+		DialogFragment aboutDialog = new AboutDialog();
+		aboutDialog.show(getFragmentManager(), null);
+	}
+
+	public void setCheckedNavigationItem(int id) {
+		((NavigationView) findViewById(R.id.act_main_navigation)).setCheckedItem(id);
+	}
+
+	public Toolbar getToolbar() {
+		return mToolbar;
 	}
 
 }

@@ -1,0 +1,41 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+	<View style="@style/Separator.Horizontal"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal"
+		android:paddingLeft="16dp"
+		android:paddingRight="16dp"
+		android:minHeight="48dp">
+
+		<TextView
+			style="@style/Grades"
+			android:id="@+id/item_grades_hint_result"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:textAlignment="viewStart"
+			android:gravity="start"/>
+
+		<TextView
+			style="@style/TextAppearance.AppCompat.Body1"
+			android:id="@+id/item_grades_hint_average"
+			android:layout_width="@dimen/hint_right_column_width"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="24dp"
+			android:layout_marginStart="24dp"
+			android:textSize="16sp"
+			android:textAlignment="viewEnd"
+			android:gravity="end"/>
+
+	</LinearLayout>
+
+</LinearLayout>

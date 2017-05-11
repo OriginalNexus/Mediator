@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<color name="primary">#2196F3</color>
+	<color name="primary_dark">#1976D2</color>
+	<color name="accent">#2196F3</color>
+	
+	<color name="text_light">#ffffff</color>
+
+	<color name="grades_hint_over_light">#388e3c</color>
+	<color name="grades_hint_over_dark">#00c853</color>
+
+	<color name="grades_hint_under_light">#d50000</color>
+	<color name="grades_hint_under_dark">#ff5252</color>
+
+	<color name="separator_light">#1f000000</color>
+	<color name="separator_dark">#1fffffff</color>
+
+	<color name="background_light">#fafafa</color>
+	<color name="background_dark">#303030</color>
+
+</resources>

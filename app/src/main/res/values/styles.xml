@@ -1,104 +1,80 @@
 <resources>
 
 	<style name="Mediator.Light" parent="Theme.AppCompat.Light.NoActionBar">
-		<item name="colorPrimary">@color/colorPrimary</item>
-		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-		<item name="action_bar_theme">@style/ActionBar.Light</item>
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/accent</item>
 
-		<item name="background_main">@color/background_light</item>
-		<item name="android:textColor">@color/text_light</item>
+		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
 
-		<item name="card_border">@color/card_border_light</item>
-		<item name="card_background">@color/card_background_light</item>
+		<item name="color_separator">@color/separator_light</item>
+		<item name="color_grades_hint_over">@color/grades_hint_over_light</item>
+		<item name="color_grades_hint_under">@color/grades_hint_under_light</item>
+		<item name="color_background">@color/background_light</item>
 
-		<item name="keypad_border" format="color">@color/keypad_border_light</item>
-		<item name="keypad_top" format="color">@color/keypad_top_light</item>
-		<item name="keypad_bottom" format="color">@color/keypad_bottom_light</item>
-
-		<item name="keypad_pressed_border" format="color">@color/keypad_pressed_border_light</item>
-		<item name="keypad_pressed_top" format="color">@color/keypad_pressed_top_light</item>
-		<item name="keypad_pressed_bottom" format="color">@color/keypad_pressed_bottom_light</item>
-
-		<item name="drawer_header_background">@color/drawer_header_background_light</item>
-		<item name="grades_card_over">@color/grades_card_over_light</item>
-		<item name="grades_card_under">@color/grades_card_under_light</item>
-		<item name="subject_header_color">@color/subject_header_color_light</item>
-		<item name="separator_color">@color/separator_light</item>
+		<item name="ic_add">@drawable/ic_add_black_24dp</item>
+		<item name="ic_remove">@drawable/ic_remove_black_24dp</item>
 	</style>
 	
 	<style name="Mediator.Dark" parent="Theme.AppCompat.NoActionBar">
-		<item name="colorPrimary">@color/colorPrimary</item>
-		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-		<item name="action_bar_theme">@style/ActionBar.Dark</item>
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/accent</item>
 
-		<item name="background_main">@color/background_dark</item>
-		<item name="android:textColor">@color/text_dark</item>
-
-		<item name="card_border">@color/card_border_dark</item>
-		<item name="card_background">@color/card_background_dark</item>
-
-		<item name="keypad_border" format="color">@color/keypad_border_dark</item>
-		<item name="keypad_top" format="color">@color/keypad_top_dark</item>
-		<item name="keypad_bottom" format="color">@color/keypad_bottom_dark</item>
-
-		<item name="keypad_pressed_border" format="color">@color/keypad_pressed_border_dark</item>
-		<item name="keypad_pressed_top" format="color">@color/keypad_pressed_top_dark</item>
-		<item name="keypad_pressed_bottom" format="color">@color/keypad_pressed_bottom_dark</item>
-
-		<item name="drawer_header_background">@color/drawer_header_background_dark</item>
-		<item name="grades_card_over">@color/grades_card_over_dark</item>
-		<item name="grades_card_under">@color/grades_card_under_dark</item>
-		<item name="subject_header_color">@color/subject_header_color_dark</item>
-		<item name="separator_color">@color/separator_dark</item>
-	</style>
-
-	
-	<style name="ActionBar.Light" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-	</style>
-
-	<style name="ActionBar.Dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
 		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+
+		<item name="color_separator">@color/separator_dark</item>
+		<item name="color_grades_hint_over">@color/grades_hint_over_dark</item>
+		<item name="color_grades_hint_under">@color/grades_hint_under_dark</item>
+		<item name="color_background">@color/background_dark</item>
+
+		<item name="ic_add">@drawable/ic_add_white_24dp</item>
+		<item name="ic_remove">@drawable/ic_remove_white_24dp</item>
 	</style>
 
-
-	<style name="KeypadBtn" parent="android:Widget.TextView">
+	<style name="KeypadBtn" parent="Widget.AppCompat.Button.Borderless">
 		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">0dp</item>
+		<item name="android:textSize">20sp</item>
+		<item name="layout_columnWeight">1</item>
+		<item name="layout_rowWeight">1</item>
+	</style>
+
+
+	<style name="Grades" parent="TextAppearance.AppCompat.Body1">
+		<item name="android:textSize">16sp</item>
+	</style>
+
+	<style name="Grades.Over">
+		<item name="android:textColor">?attr/color_grades_hint_over</item>
+	</style>
+
+	<style name="Grades.Middle" />
+
+	<style name="Grades.Under">
+		<item name="android:textColor">?attr/color_grades_hint_under</item>
+	</style>
+
+
+	<style name="InputField" parent="Widget.AppCompat.EditText">
+		<item name="android:gravity">center</item>
+	</style>
+
+
+	<style name="Separator">
+		<item name="android:background">?attr/color_separator</item>
+	</style>
+
+	<style name="Separator.Vertical">
+		<item name="android:layout_width">@dimen/separator_size</item>
 		<item name="android:layout_height">match_parent</item>
-		<item name="android:layout_gravity">center</item>
-		<item name="android:layout_margin">4dp</item>
-		<item name="android:layout_weight">1</item>
-		<item name="android:background">@drawable/keypad_btn</item>
-		<item name="android:gravity">center</item>
-		<item name="android:textSize">23sp</item>
 	</style>
 
-	<style name="NormalBtn" parent="android:Widget.TextView">
-		<item name="android:background">@drawable/keypad_btn</item>
-		<item name="android:gravity">center</item>
-		<item name="android:clickable">true</item>
-	</style>
-
-
-	<style name="InputField">
-		<item name="android:background">?attr/editTextBackground</item>
-		<item name="android:gravity">center</item>
-		<item name="android:clickable">true</item>
-		<item name="android:focusable">true</item>
-		<item name="android:focusableInTouchMode">false</item>
-	</style>
-
-
-	<style name="GradesCard" parent="android:Widget.TextView" />
-
-	<style name="GradesCard.Over">
-		<item name="android:textColor">?attr/grades_card_over</item>
-	</style>
-
-	<style name="GradesCard.Middle" />
-
-	<style name="GradesCard.Under">
-		<item name="android:textColor">?attr/grades_card_under</item>
+	<style name="Separator.Horizontal">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">@dimen/separator_size</item>
 	</style>
 
 </resources>

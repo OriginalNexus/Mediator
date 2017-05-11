@@ -5,11 +5,11 @@ import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.text.Html;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
@@ -25,7 +25,7 @@ public class AboutDialog extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 		// Set version in text
-		String msg = getString(R.string.about_dialog_content);
+		String msg = getString(R.string.dialog_about_content);
 		try {
 			msg = String.format(msg, getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName);
 		}
@@ -36,23 +36,30 @@ public class AboutDialog extends DialogFragment {
 		// Create view
 		TextView mView = new TextView(getActivity());
 		mView.setMovementMethod(LinkMovementMethod.getInstance());
-		int px = (int) getResources().getDimension(R.dimen.Dialog_padding);
-		mView.setPadding(px,px,px,px);
-		mView.setText(Html.fromHtml(msg));
-		// On android level < 11 background of dialog is always black so we make the text white
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			mView.setTextColor(ContextCompat.getColor(getContext(), R.color.text_dark));
-		}
+		int px = (int) getResources().getDimension(R.dimen.dialog_padding);
+		mView.setPadding(px, px, px, px);
+		mView.setText(fromHtml(msg));
 
-		builder.setTitle(R.string.about_dialog_title)
+		builder.setTitle(R.string.dialog_about_title)
 				.setView(mView)
-				.setPositiveButton(R.string.about_dialog_button, new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.dialog_about_button, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
 					}
 				});
+
 		return builder.create();
+	}
+
+	private Spanned fromHtml(String s) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+			//noinspection deprecation
+			return Html.fromHtml(s);
+		}
+		else {
+			return Html.fromHtml(s, Html.FROM_HTML_MODE_LEGACY);
+		}
 	}
 
 }

@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mediator</string>
-    <string name="grades_hint_text">Note</string>
-	<string name="thesis_hint_text">Teză</string>
-	<string name="grades_card_grades_hint_text">Note minime</string>
-	<string name="grades_card_average_hint_text">Media</string>
-    <string name="digit_1">1</string>
-    <string name="digit_2">2</string>
-    <string name="digit_3">3</string>
-    <string name="digit_4">4</string>
-    <string name="digit_5">5</string>
-    <string name="digit_6">6</string>
-    <string name="digit_7">7</string>
-    <string name="digit_8">8</string>
-    <string name="digit_9">9</string>
-	<string name="digit_10">10</string>
-	<string name="digit_remove">—</string>
-	<string name="digit_done">Gata</string>
-	<string name="enter_grades_hint"/>
-	<string name="average_text">Media:</string>
-	<string name="extra_grades_text">Note în plus:</string>
-	<string name="grades_card_over">Ai cel puțin</string>
-	<string name="grades_card_under">Iei sub</string>
-	<string name="extra_button_minus">-</string>
-	<string name="extra_button_plus">+</string>
-	<string name="menu_help">Ajutor</string>
-	<string name="menu_settings">Preferințe</string>
-	<string name="menu_about">Despre</string>
-	<string name="help_dialog_title">Ajutor</string>
-    <string name="help_dialog_content">
+	<string name="app_name">Mediator</string>
+
+	<string name="act_main_on_back_pressed">Apăsați din nou pentru a ieși</string>
+
+	<string name="frag_mediator_title">Mediator</string>
+	<string name="frag_mediator_grades">Note</string>
+	<string name="frag_mediator_thesis">Teză</string>
+	<string name="frag_mediator_average">Media</string>
+	<string name="frag_mediator_table_title">Note în plus</string>
+	<string name="frag_mediator_table_header_grades">Note necesare</string>
+	<string name="frag_mediator_table_header_average">Media</string>
+	<string name="frag_mediator_remove">Minus</string>
+	<string name="frag_mediator_add">Plus</string>
+
+	<string name="frag_grades_over">Ai cel puțin</string>
+	<string name="frag_grades_under">Iei sub</string>
+
+	<string name="frag_subject_grades">Note:</string>
+	<string name="frag_subject_thesis">Teză:</string>
+	<string name="frag_subject_mediator_btn">Spre Mediator</string>
+
+	<string name="frag_report_card_title">Carnet de note</string>
+	<string name="frag_report_card_snack_delete">\"%s\" a fost șters.</string>
+	<string name="frag_report_card_snack_undo">Anulează</string>
+
+	<string name="frag_settings_title">Setări</string>
+
+	<string name="view_keypad_remove">—</string>
+	<string name="view_keypad_done">Gata</string>
+
+	<string name="item_subject_thesis">Teză:</string>
+	<string name="item_subject_grades">Note:</string>
+	<string name="item_subject_grades_hint">Nici o notă</string>
+
+	<string name="dialog_help_title">Ajutor</string>
+	<string name="dialog_help_content">
 	    <b>Calculul mediei</b>\n
 	    \n
-	    Pentru a vă calcula media selectați întâi câmpul <i>Note</i>. O tastatură ce cuprinde toate notele de la 1 la 10 va apărea. Introduceți notele și apoi apăsați tasta <i>Gata</i>. Media va fi afișată.\n
+	    Pentru a vă calcula media selectați întâi câmpul <i>Note</i>. O tastatură ce cuprinde toate notele de la 1 la 10 va apărea. Introduceți notele și apoi apăsați tasta <i>GATA</i>. Media va fi afișată.\n
 	    Folosiți tasta minus pentru a șterge o notă.\nOpțional puteți introduce nota din teză după ce selectați câmpul respectiv.\n
 	    <u>Notă:</u> Pentru introducere/ștergere rapidă țineți apăsat butonul.\n
 	    \n
@@ -40,23 +47,21 @@
 	    \n
 	    Aplicația poate de asemenea să determine notele necesare obținerii unei anumite medii. De exemplu avem notele 6, 7, 8, 8 cu media 7.25 adică 7 în catalog. Să zicem că mai putem lua o notă (pentru a ne corecta media). Însă ce notă ne va duce spre media 8?\n
 	    \n
-	    Aplicația ne poate spune acest lucru. Introducem notele deja existente (6,7,8,8) și apăsăm pe butonul + de lângă <i>Note în plus</i>. Un tabel va apărea cu informațiile necesare. Pentru media 8 avem scrisă sub <i>Note minime</i> nota 9. Deci nota minimă care ne va duce spre media 8 este 9. Tot din tabel aflăm că pentru a ne menține media 7 ne trebuie minim un 4.
+	    Aplicația ne poate spune acest lucru. Introducem notele deja existente (6,7,8,8) și apăsăm pe butonul + de lângă <i>Note în plus</i>. Un tabel va apărea cu informațiile necesare. Pentru media 8 avem scrisă sub <i>Note necesare</i> nota 9. Deci nota minimă care ne va duce spre media 8 este 9. Tot din tabel aflăm că pentru a ne menține media 7 ne trebuie minim un 4.
     </string>
-	<string name="help_dialog_button">Am înțeles</string>
-	<string name="about_dialog_title">Despre</string>
-	<string name="about_dialog_content">
+	<string name="dialog_help_button">Am înțeles</string>
+
+	<string name="dialog_about_title">Despre</string>
+	<string name="dialog_about_content">
 		&lt;h1&gt;Mediator %s&lt;/h1&gt;
 		&lt;p&gt;
 			&lt;a href="http://originalnexus.github.io/Mediator/"&gt;Site oficial&lt;/a&gt;
 		&lt;/p&gt;
 		&lt;p&gt;
-			&lt;a href="https://plus.google.com/103442886155774241507/"&gt;Google+&lt;/a&gt;
-		&lt;/p&gt;
-		&lt;p&gt;
 			&lt;a href="https://github.com/OriginalNexus/Mediator/"&gt;GitHub&lt;/a&gt;
 		&lt;/p&gt;
 
-		&lt;h1&gt;Creat de Neacșu Răzvan&lt;/h1&gt;
+		&lt;h1&gt;Creat de Răzvan Neacșu&lt;/h1&gt;
 		&lt;p&gt;
 			Email: &lt;a href="mailto:razvan.neacsu5@gmail.com"&gt;&lt;i&gt;razvan.neacsu5@gmail.com&lt;/i&gt;&lt;/a&gt;
 		&lt;/p&gt;
@@ -70,35 +75,36 @@
 			&lt;a href="https://github.com/OriginalNexus/"&gt;GitHub&lt;/a&gt;
 		&lt;/p&gt;
 	</string>
-	<string name="about_dialog_button">OK</string>
-	<string name="pref_theme_title">Culoare interfață</string>
-	<string name="pref_theme_default_value">light</string>
-	<string name="pref_title">Preferințe</string>
-	<string name="pref_theme_summary_light">Alb</string>
-	<string name="pref_theme_summary_dark">Negru</string>
+	<string name="dialog_about_button">OK</string>
+
+	<string name="dialog_name_title">Nume materie</string>
+	<string name="dialog_name_ok">OK</string>
+	<string name="dialog_name_cancel">Anulați</string>
+
+	<string name="dialog_delete_text">Ștergeți \"%s\"?</string>
+
 	<string name="drawer_open">Deschide sertar</string>
 	<string name="drawer_close">Închide sertar</string>
 	<string name="drawer_header_title">Mediator</string>
 	<string name="drawer_header_subtitle">te scapă de calculator</string>
 	<string name="drawer_header_image_description">Mediator Image</string>
-	<string name="drawer_item_mediator">Mediator</string>
-	<string name="drawer_item_report_card">Carnet de note</string>
-	<string name="drawer_item_settings">Setări</string>
-	<string name="drawer_item_about">Despre</string>
-	<string name="drawer_item_help">Ajutor</string>
-	<string name="subject_item_thesis">Teză:</string>
-	<string name="subject_item_grades">Note:</string>
-	<string name="name_dialog_title">Nume materie</string>
-	<string name="name_dialog_ok">OK</string>
-	<string name="name_dialog_cancel">Anulați</string>
-	<string name="sub_frag_grades">Note:</string>
-	<string name="sub_frag_thesis">Teza:</string>
-	<string name="sub_frag_mediator_btn">Spre Mediator</string>
-	<string name="report_card_title">Carnet de note</string>
-	<string name="menu_delete">Șterge</string>
-	<string name="subject_item_grades_hint">Nici o notă</string>
-	<string name="answer_yes">Da</string>
-	<string name="answer_no">Nu</string>
-	<string name="delete_dialog_text">Ștergeți \"%s\"?</string>
+
+	<string name="menu_main_help">Ajutor</string>
+	<string name="menu_main_settings">Setări</string>
+	<string name="menu_main_about">Despre</string>
+
+	<string name="menu_drawer_mediator">Mediator</string>
+	<string name="menu_drawer_report_card">Carnet de note</string>
+	<string name="menu_drawer_settings">Setări</string>
+	<string name="menu_drawer_about">Despre</string>
+	<string name="menu_drawer_help">Ajutor</string>
+
+	<string name="menu_subject_delete">Șterge</string>
+
+	<string name="pref_dark_theme">Temă întunecată</string>
+	<string name="pref_dark_theme_summary">Utilizează o interfață întunecată</string>
+
+	<string name="yes">Da</string>
+	<string name="no">Nu</string>
 
 </resources>

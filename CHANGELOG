@@ -1,3 +1,18 @@
+v1.3.0
+
+    Note: HUGE CHANGES
+
+    ++ New Material Design UI
+    ** Code almost completely rewritten (lots of refactoring and cleaning)
+    ** Fixed RTL layout
+    ** Fixed laggy navigation drawer
+    ++ Navigation drawer icons
+    ++ Transition animations
+    -- App now requires at least API 14
+    ++ Double press back button to exit app
+    ** Solved a lot of bugs
+    ** Many other things I forgot to mention
+
 v1.2.2
 
 	++ Support for RTL

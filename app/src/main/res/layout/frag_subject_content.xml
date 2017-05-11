@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<LinearLayout
+		android:id="@+id/frag_subject_header"
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="16dp"
+		android:background="@color/primary">
+
+		<TextView
+			style="@style/TextAppearance.AppCompat.Headline"
+			android:id="@+id/frag_subject_name"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_gravity="center_vertical"
+			android:textColor="@color/text_light"
+			android:textAlignment="viewStart"
+			android:gravity="start"/>
+
+		<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginLeft="8dp"
+			android:layout_gravity="center_vertical">
+
+			<TextView
+				style="@style/TextAppearance.AppCompat.Display1"
+				android:id="@+id/frag_subject_average_round"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/text_light"/>
+
+			<TextView
+				style="@style/TextAppearance.AppCompat.Subhead"
+				android:id="@+id/frag_subject_average"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginLeft="8dp"
+				android:layout_alignBaseline="@+id/frag_subject_average_round"
+				android:layout_toRightOf="@+id/frag_subject_average_round"
+				android:layout_toEndOf="@+id/frag_subject_average_round"
+				android:textColor="@color/text_light"/>
+
+		</RelativeLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/frag_subject_input_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="16dp"
+		android:clipToPadding="false"
+		android:orientation="vertical"
+		android:focusable="true"
+		android:focusableInTouchMode="true"
+		android:descendantFocusability="beforeDescendants">
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="72dp">
+
+			<TextView
+				style="@style/TextAppearance.AppCompat.Large"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_gravity="center_vertical"
+				android:text="@string/frag_subject_grades"
+				android:textAlignment="viewStart"
+				android:gravity="start"/>
+
+			<TextView
+				style="@style/InputField"
+				android:id="@+id/frag_subject_grades"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="8dp"
+				android:layout_marginLeft="8dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="72dp">
+
+			<TextView
+				style="@style/TextAppearance.AppCompat.Large"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_gravity="center_vertical"
+				android:text="@string/frag_subject_thesis"
+				android:textAlignment="viewStart"
+				android:gravity="start"/>
+
+			<TextView
+				style="@style/InputField"
+				android:id="@+id/frag_subject_thesis"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="8dp"
+				android:layout_marginLeft="8dp"/>
+
+		</LinearLayout>
+
+		<Button
+			style="@style/Widget.AppCompat.Button.Colored"
+			android:id="@+id/frag_subject_mediator_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="8dp"
+			android:text="@string/frag_subject_mediator_btn"/>
+
+	</LinearLayout>
+
+</LinearLayout>

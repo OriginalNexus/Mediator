@@ -1,13 +1,12 @@
 package com.originalnexus.mediator.dialogs;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+import android.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
@@ -18,22 +17,17 @@ import com.originalnexus.mediator.R;
 
 public class NameDialog extends DialogFragment {
 
-	private final static String STATE_STRING = "string1";
-	private final static String STATE_REQ_CODE = "req_code";
-
-	private String mString = "";
-	private int reqCode;
-	private NameDialogListener mCallback;
-
 	public interface NameDialogListener {
-		void onNameDialogConfirm(int requestCode, String input);
+		void onNameDialogConfirm(String input);
 	}
 
+	private final static String STATE_TEXT = "text";
+	private String mText = "";
 
-	public static NameDialog newInstance(int requestCode, String initialString) {
+
+	public static NameDialog newInstance(String initialString) {
 		NameDialog f = new NameDialog();
-		f.mString = initialString;
-		f.reqCode = requestCode;
+		f.mText = initialString;
 		return f;
 	}
 
@@ -43,58 +37,50 @@ public class NameDialog extends DialogFragment {
 
 		// Restore state
 		if (savedInstanceState != null) {
-			mString = savedInstanceState.getString(STATE_STRING);
-			reqCode = savedInstanceState.getInt(STATE_REQ_CODE);
+			mText = savedInstanceState.getString(STATE_TEXT);
 		}
 
-		// Create edit text
+		// Create edit mText
 		final EditText editT = new EditText(getActivity());
-		editT.setText(mString);
-		editT.setSelection(mString.length());
+		editT.setText(mText);
+		editT.setSelection(mText.length());
 		editT.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-			}
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				mString = s.toString();
-
-				// Make sure input is not blank
-				if (mString.equals("") || mString.replaceAll("\\s", "").equals("")) {
-					((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-				}
-				else {
-					((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-				}
+				mText = s.toString();
+				updatePositiveButton();
 			}
 		});
 
 		// Create root view
 		FrameLayout rootView = new FrameLayout(getActivity());
-		int px = (int) getResources().getDimension(R.dimen.Dialog_padding);
+		int px = (int) getResources().getDimension(R.dimen.dialog_padding);
 		rootView.setPadding(px, px, px, px);
 		rootView.addView(editT);
 
 		// Create the builder
 		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
 		b
-			.setView(rootView)
-			.setTitle(R.string.name_dialog_title)
-			.setPositiveButton(R.string.name_dialog_ok, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					mCallback.onNameDialogConfirm(reqCode, mString);
-					dialog.dismiss();
-				}
-			})
-			.setNegativeButton(R.string.name_dialog_cancel, new DialogInterface.OnClickListener() {
+				.setView(rootView)
+				.setTitle(R.string.dialog_name_title)
+				.setPositiveButton(R.string.dialog_name_ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						try {
+							((NameDialogListener) getTargetFragment()).onNameDialogConfirm(mText);
+						}
+						catch (ClassCastException ignored) {}
+
+						dialog.dismiss();
+					}
+				})
+				.setNegativeButton(R.string.dialog_name_cancel, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.cancel();
@@ -106,12 +92,9 @@ public class NameDialog extends DialogFragment {
 		dialog.setOnShowListener(new DialogInterface.OnShowListener() {
 			@Override
 			public void onShow(DialogInterface dialog) {
-				// Make sure input is not blank
-				if (mString.equals("") || mString.replaceAll("\\s", "").equals("")) {
-					((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-				}
+				updatePositiveButton();
 
-				// Focus edit text
+				// Focus edit mText
 				editT.requestFocus();
 
 				// Open keyboard
@@ -123,21 +106,19 @@ public class NameDialog extends DialogFragment {
 		return dialog;
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		outState.putString(STATE_STRING, mString);
-		outState.putInt(STATE_REQ_CODE, reqCode);
-		super.onSaveInstanceState(outState);
+	private void updatePositiveButton() {
+		// If input is blank disable positive button
+		if (mText.equals("") || mText.replaceAll("\\s", "").equals("")) {
+			((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+		}
+		else {
+			((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+		}
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			mCallback = (NameDialogListener) activity;
-		}
-		catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement NameDialogListener.");
-		}
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putString(STATE_TEXT, mText);
+		super.onSaveInstanceState(outState);
 	}
 }

@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
 	<group
+		android:id="@+id/menu_drawer_top"
 		android:checkableBehavior="single"
 		android:enabled="true">
 
 		<item
-			android:id="@+id/drawer_item_mediator"
+			android:id="@+id/menu_drawer_mediator"
 			android:checked="true"
-			android:title="@string/drawer_item_mediator"/>
+			android:title="@string/menu_drawer_mediator"
+			android:icon="@drawable/ic_10_black_24dp"/>
 		<item
-			android:id="@+id/drawer_item_report_card"
-			android:checked="false"
-			android:title="@string/drawer_item_report_card"/>
+			android:id="@+id/menu_drawer_report_card"
+			android:title="@string/menu_drawer_report_card"
+			android:icon="@drawable/ic_book_black_24dp"/>
 		<item
-			android:id="@+id/drawer_item_settings"
-		    android:title="@string/drawer_item_settings" />
-		<item
-			android:id="@+id/drawer_item_help"
-			android:title="@string/drawer_item_help" />
-		<item
-			android:id="@+id/drawer_item_about"
-			android:title="@string/drawer_item_about" />
+			android:id="@+id/menu_drawer_none"
+			android:visible="false"/>
+
 	</group>
+
+	<group
+		android:id="@+id/menu_drawer_bottom"
+		android:checkableBehavior="none">
+
+		<item
+			android:id="@+id/menu_drawer_settings"
+			android:title="@string/menu_drawer_settings"
+			android:icon="@drawable/ic_settings_black_24dp"/>
+		<item
+			android:id="@+id/menu_drawer_help"
+			android:title="@string/menu_drawer_help"
+			android:icon="@drawable/ic_help_black_24dp"/>
+		<item
+			android:id="@+id/menu_drawer_about"
+			android:title="@string/menu_drawer_about"
+			android:icon="@drawable/ic_info_black_24dp"/>
+
+	</group>
+
 </menu>
