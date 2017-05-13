@@ -7,73 +7,74 @@
 
 	<link rel="shortcut icon" href="./favicon.ico"/>
 
-	<link rel="stylesheet" type="text/css" href="./css/style.css">
-	<script type="text/javascript" src="./js/script.js"></script>
+	<!-- Bootswatch Paper Theme -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet">
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<!-- Custom styles and scripts -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/script.js"></script>
 
 	<!-- Google Analytics -->
-	<script type="text/javascript" src="./js/analyticstracking.js"></script>
+	<script type="text/javascript" src="js/analyticstracking.js"></script>
+
 </head>
-<body onload="update();">
+<body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="./index.html">Mediator</a>
+				<a class="navbar-brand" href="index.html">Mediator</a>
 			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li><a href="./index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-					<li class="active"><a>Download</a></li>
-					<li><a href="https://plus.google.com/103442886155774241507">Google+</a></li>
+			<div class="collapse navbar-collapse" id="main-navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="download.html">Download</a></li>
+					<li><a href="https://github.com/OriginalNexus/Mediator" target="_blank"><span class="glyphicon glyphicon-new-window"></span> GitHub</a></li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown">Contact<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="https://github.com/OriginalNexus">Github</a></li>
-							<li><a href="https://plus.google.com/114989395056130155654">Google+</a></li>
-							<li><a href="https://www.facebook.com/neacsu.razvan.75">Facebook</a></li> 
+							<li><a href="https://github.com/OriginalNexus" target="_blank">GitHub</a></li>
+							<li><a href="https://www.facebook.com/neacsu.razvan.75" target="_blank">Facebook</a></li>
+							<li><a href="https://plus.google.com/+RazvanNeacsuNexus" target="_blank">Google+</a></li>
 						</ul>
 					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a class="dl-btn-nav"></a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<div class="container">
-		<div class="jumbotron">
-			<h1>Download</h1> 
-		</div>
 
-		<div class="row">
-			<div class="col-sm-12">
-				<h2>Ultima versiune: </h2>
-				<br/>
-				<p><a class="btn btn-primary btn-lg dl-btn"></a></p>
-				<br/>
-				<h2>Changelog:</h2>
-				<a href="https://github.com/OriginalNexus/Mediator/blob/master/CHANGELOG" target="_blank"><span class="glyphicon glyphicon-link"></span> Click aici</a>
+		<div class="row flex" style="align-items: center; flex-wrap: wrap;">
+			<div class="col-sm-7">
+				<h1>Download</h1>
+				<h4>Ultima versiune este <span class="version"></span></h4>
+				<p>Descărcați de aici fișierul .apk pentru instalare</p>
+				<a class="btn btn-primary download-btn"></a>
+				<a class="btn btn-default" href="https://github.com/OriginalNexus/Mediator/blob/master/CHANGELOG" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Changelog</a>
+				<a class="btn btn-default" href="https://github.com/OriginalNexus/Mediator/releases/latest" target="_blank"><span class="glyphicon glyphicon-new-window"></span> GitHub</a>
+				<hr style="margin-top: 80px;">
+
+				<a class="btn btn-default" href="https://github.com/OriginalNexus/Mediator/releases" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Toate versiunile</a>
+
+			</div>
+			<div class="col-sm-5">
+				<img src="images/app_main_view_2.png" alt="Mediator Main View 2" class="img-responsive">
 			</div>
 		</div>
 	</div>
 
 	<footer class="footer">
 		<div class="container">
-			<p class="text-muted">Acest site a fost creat folosind <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>
+			<p class="text-muted">Acest site folosește <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>, <a href="http://glyphicons.com" target="_blank">Glyphicons</a> și <a href="https://bootswatch.com" target="_blank">Bootswatch</a></p>
 		</div>
 	</footer>
 </body>
