@@ -1,5 +1,5 @@
 
-var VERSION = "v1.3.0"
+var VERSION = "v1.3.1"
 var FILE_NAME = "Mediator-" + VERSION +  ".apk"
 
 $(document).ready(function() {
