@@ -5,6 +5,7 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.originalnexus.mediator.models.Subject;
 
@@ -14,7 +15,7 @@ public class DataManager {
 
 	private static final String SAVE_SUBJECTS = "subjects";
 
-	public static ArrayList<Subject> Subjects = new ArrayList<>();
+	public static final ArrayList<Subject> Subjects = new ArrayList<>();
 
 	public static void saveSubjects(Context context) {
 		Gson gson = new Gson();
@@ -25,8 +26,19 @@ public class DataManager {
 		Gson gson = new Gson();
 		String savedString;
 		savedString = PreferenceManager.getDefaultSharedPreferences(context).getString(SAVE_SUBJECTS, null);
-		if (savedString != null)
-			Subjects = gson.fromJson(savedString, new TypeToken<ArrayList<Subject>>(){}.getType());
+
+		Subjects.clear();
+		if (savedString != null) {
+			ArrayList<Subject> savedSubjects = null;
+			try {
+				savedSubjects = gson.fromJson(savedString, new TypeToken<ArrayList<Subject>>() {}.getType());
+			} catch (JsonParseException ignored) {}
+			if (savedSubjects != null) {
+				// Filter corrupted subjects
+				for (Subject s : savedSubjects) if (s.name != null && s.grades != null) Subjects.add(s);
+			}
+
+		}
 	}
 
 }

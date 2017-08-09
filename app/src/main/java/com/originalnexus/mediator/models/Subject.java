@@ -2,12 +2,24 @@ package com.originalnexus.mediator.models;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Subject {
+
+	@SerializedName("name")
 	public String name;
-	public final ArrayList<Integer> grades;
+	@SerializedName("grades")
+	public ArrayList<Integer> grades;
+	@SerializedName("thesis")
 	public int thesis;
+
+	/**
+	 * This no-args constructor is required for Gson to work properly
+	 */
+	@SuppressWarnings("unused")
+	private Subject() {}
 
 	/**
 	 * Creates a new Subject with the given name

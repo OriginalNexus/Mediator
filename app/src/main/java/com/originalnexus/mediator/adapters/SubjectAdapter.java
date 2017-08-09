@@ -34,11 +34,11 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 		SubjectViewHolder(View v) {
 			super(v);
 			mView = v;
-			mNameView = (TextView) v.findViewById(R.id.item_subject_name);
-			mGradesView = (TextView) v.findViewById(R.id.item_subject_grades);
-			mThesisView = (TextView) v.findViewById(R.id.item_subject_thesis);
-			mAverageView = (TextView) v.findViewById(R.id.item_subject_average);
-			mThesisTextView = (TextView) v.findViewById(R.id.item_subject_thesis_label);
+			mNameView = v.findViewById(R.id.item_subject_name);
+			mGradesView = v.findViewById(R.id.item_subject_grades);
+			mThesisView = v.findViewById(R.id.item_subject_thesis);
+			mAverageView = v.findViewById(R.id.item_subject_average);
+			mThesisTextView = v.findViewById(R.id.item_subject_thesis_label);
 			mElevateAnim = ValueAnimator.ofFloat(0f, mView.getResources().getDimension(R.dimen.drag_drop_elevation)).setDuration(200);
 			mElevateAnim.setInterpolator(new AccelerateInterpolator());
 			mElevateAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

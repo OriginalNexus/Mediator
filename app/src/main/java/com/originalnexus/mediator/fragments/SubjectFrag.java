@@ -74,7 +74,7 @@ public class SubjectFrag extends Fragment implements NameDialog.NameDialogListen
 		mSubject = DataManager.Subjects.get(mSubjectIndex);
 
 		// Set keypad
-		mKeypad = (KeypadView) getView().findViewById(R.id.frag_subject_keypad);
+		mKeypad = getView().findViewById(R.id.frag_subject_keypad);
 		mKeypad.setKeypadListener(new KeypadView.KeypadListener() {
 			@Override
 			public void onInput(int digit) {

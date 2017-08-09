@@ -92,7 +92,7 @@ public class KeypadView extends FrameLayout {
 		setAnimations();
 		hide();
 
-		GridLayout grid = (GridLayout) findViewById(R.id.view_keypad_grid);
+		GridLayout grid = findViewById(R.id.view_keypad_grid);
 		for (int i = 0; i < grid.getChildCount(); i++) {
 			View btnView = grid.getChildAt(i);
 			if (btnView == null) break;

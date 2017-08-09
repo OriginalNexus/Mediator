@@ -62,7 +62,7 @@ public class MediatorFrag extends Fragment implements MainActivity.BackPressedLi
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.frag_mediator, container, false);
-		LinearLayout parent = (LinearLayout) v.findViewById(R.id.frag_mediator_table_content);
+		LinearLayout parent = v.findViewById(R.id.frag_mediator_table_content);
 		for (int i = 2; i <= 10; i++) {
 			inflater.inflate(R.layout.item_grades_hint, parent, true);
 		}
@@ -86,7 +86,7 @@ public class MediatorFrag extends Fragment implements MainActivity.BackPressedLi
 		if (getView() == null) return;
 
 		// Set keypad
-		mKeypad = (KeypadView) getView().findViewById(R.id.keypad_view);
+		mKeypad = getView().findViewById(R.id.keypad_view);
 		mKeypad.setKeypadListener(new KeypadView.KeypadListener() {
 			@Override
 			public void onInput(int digit) {
@@ -207,12 +207,12 @@ public class MediatorFrag extends Fragment implements MainActivity.BackPressedLi
 	private void updateGradesHints() {
 		if (getView() == null) return;
 
-		LinearLayout parent = (LinearLayout) getView().findViewById(R.id.frag_mediator_table_content);
+		LinearLayout parent = getView().findViewById(R.id.frag_mediator_table_content);
 
 		for (int i = 2; i <= 10; i++) {
 			GradesHint hint = mGradesHints[i - 2];
 			View hintView = parent.getChildAt(i - 2);
-			TextView hintText = (TextView) hintView.findViewById(R.id.item_grades_hint_result);
+			TextView hintText = hintView.findViewById(R.id.item_grades_hint_result);
 
 			((TextView) hintView.findViewById(R.id.item_grades_hint_average)).setText(String.valueOf(i));
 

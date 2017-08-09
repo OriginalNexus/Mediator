@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.act_main);
 
 		// Setup Toolbar
-		mToolbar = (Toolbar) findViewById(R.id.act_main_toolbar);
+		mToolbar = findViewById(R.id.act_main_toolbar);
 		ViewCompat.setElevation(mToolbar, getResources().getDimension(R.dimen.app_bar_elevation));
 		setSupportActionBar(mToolbar);
 
@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		// Setup drawer
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.act_main_drawer_layout);
-		NavigationView navigationView = (NavigationView) findViewById(R.id.act_main_navigation);
+		mDrawerLayout = findViewById(R.id.act_main_drawer_layout);
+		NavigationView navigationView = findViewById(R.id.act_main_navigation);
 
 		navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 			@Override

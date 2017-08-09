@@ -42,9 +42,9 @@ public class ReportCardFrag extends Fragment implements NameDialog.NameDialogLis
 		getActivity().setTitle(R.string.frag_report_card_title);
 		((MainActivity) getActivity()).setCheckedNavigationItem(R.id.menu_drawer_report_card);
 
-		final CoordinatorLayout root = (CoordinatorLayout) getView().findViewById(R.id.frag_report_card_container);
-		final FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.frag_report_card_fab);
-		final RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.frag_report_card_subjects);
+		final CoordinatorLayout root = getView().findViewById(R.id.frag_report_card_container);
+		final FloatingActionButton fab = getView().findViewById(R.id.frag_report_card_fab);
+		final RecyclerView recyclerView = getView().findViewById(R.id.frag_report_card_subjects);
 
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -52,14 +52,6 @@ public class ReportCardFrag extends Fragment implements NameDialog.NameDialogLis
 				NameDialog dialog = NameDialog.newInstance("");
 				dialog.setTargetFragment(ReportCardFrag.this, 0);
 				dialog.show(getFragmentManager(), null);
-			}
-		});
-
-		// Workaround for https://code.google.com/p/android/issues/detail?id=221387
-		fab.post(new Runnable() {
-			@Override
-			public void run() {
-				fab.requestLayout();
 			}
 		});
 
