@@ -2,15 +2,17 @@ package com.originalnexus.mediator.fragments;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import android.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,7 @@ public class ReportCardFrag extends Fragment implements NameDialog.NameDialogLis
 			}
 		});
 
-		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
 
 		DataManager.loadSubjects(getActivity());
 		mSubjectAdapter = new SubjectAdapter(DataManager.Subjects);
@@ -70,14 +72,14 @@ public class ReportCardFrag extends Fragment implements NameDialog.NameDialogLis
 
 		ItemTouchHelper ith = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.RIGHT) {
 			@Override
-			public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+			public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
 				mSubjectAdapter.swapSubjects(viewHolder.getAdapterPosition(), target.getAdapterPosition());
 				DataManager.saveSubjects(getActivity());
 				return true;
 			}
 
 			@Override
-			public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+			public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 				mSubjectAdapter.removeSubject(viewHolder.getAdapterPosition());
 				DataManager.saveSubjects(getActivity());
 				Snackbar snack = Snackbar.make(root,
@@ -95,7 +97,7 @@ public class ReportCardFrag extends Fragment implements NameDialog.NameDialogLis
 			}
 
 			@Override
-			public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+			public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 				super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 				// Custom look & feel
 				if (isCurrentlyActive && actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
@@ -108,7 +110,7 @@ public class ReportCardFrag extends Fragment implements NameDialog.NameDialogLis
 			}
 
 			@Override
-			public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+			public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
 				super.clearView(recyclerView, viewHolder);
 				((SubjectAdapter.SubjectViewHolder) viewHolder).setRaised(false);
 			}

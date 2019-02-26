@@ -29,12 +29,12 @@ public class GradeCalc {
 	}
 
 	public static String arrayListToString(ArrayList<Integer> a) {
-		String out = "";
+		StringBuilder out = new StringBuilder();
 		for(int i = 0; i < a.size(); i++) {
-			out += a.get(i);
-			if (i < a.size() - 1) out += ", ";
+			out.append(a.get(i));
+			if (i < a.size() - 1) out.append(", ");
 		}
-		return out;
+		return out.toString();
 	}
 
 	public static int roundAverage(double avg) {

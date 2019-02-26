@@ -30,8 +30,7 @@
 			android:id="@+id/item_subject_average"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="8dp"
-			android:layout_marginLeft="8dp"/>
+			android:layout_marginStart="8dp"/>
 
 	</LinearLayout>
 
@@ -53,7 +52,6 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:layout_marginStart="4dp"
-			android:layout_marginLeft="4dp"
 			android:hint="@string/item_subject_grades_hint"
 			android:textAlignment="viewStart"
 			android:gravity="start"/>
@@ -64,8 +62,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/item_subject_thesis"
-			android:layout_marginStart="8dp"
-			android:layout_marginLeft="8dp"/>
+			android:layout_marginStart="8dp"/>
 
 		<TextView
 			style="@style/TextAppearance.AppCompat.Body1"
@@ -73,7 +70,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="4dp"
-			android:layout_marginLeft="4dp"
 			android:textSize="16sp"/>
 	</LinearLayout>
 

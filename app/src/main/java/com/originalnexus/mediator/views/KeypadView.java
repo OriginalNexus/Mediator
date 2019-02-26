@@ -8,8 +8,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.Keep;
-import android.support.v7.widget.GridLayout;
+import androidx.annotation.Keep;
+import androidx.gridlayout.widget.GridLayout;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,16 +100,18 @@ public class KeypadView extends FrameLayout {
 			KeypadBtnType btnType;
 			int digit = 0;
 
-			if (i == 9) {
-				btnType = KeypadBtnType.REMOVE;
-			}
-			else if (i == 11) {
-				btnType = KeypadBtnType.DONE;
-			}
-			else {
-				btnType = KeypadBtnType.DIGIT;
-				digit = (i != 10) ? i + 1 : i;
-				((TextView) btnView).setText(String.valueOf(digit));
+			switch (i) {
+				case 9:
+					btnType = KeypadBtnType.REMOVE;
+					break;
+				case 11:
+					btnType = KeypadBtnType.DONE;
+					break;
+				default:
+					btnType = KeypadBtnType.DIGIT;
+					digit = (i != 10) ? i + 1 : i;
+					((TextView) btnView).setText(String.valueOf(digit));
+					break;
 			}
 
 			// Create keypad events

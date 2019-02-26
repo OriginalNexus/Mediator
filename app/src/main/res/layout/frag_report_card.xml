@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/frag_report_card_container"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<android.support.v7.widget.RecyclerView
+	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/frag_report_card_subjects"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>
 
-	<android.support.design.widget.FloatingActionButton
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/frag_report_card_fab"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -22,4 +22,4 @@
 		app:elevation="6dp"
 		app:fabSize="normal"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

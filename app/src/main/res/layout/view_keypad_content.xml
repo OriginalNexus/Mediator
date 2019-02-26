@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.GridLayout
+<androidx.gridlayout.widget.GridLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/view_keypad_grid"
@@ -25,4 +25,4 @@
 			style="@style/KeypadBtn"
 			android:text="@string/view_keypad_done"/>
 
-</android.support.v7.widget.GridLayout>
+</androidx.gridlayout.widget.GridLayout>

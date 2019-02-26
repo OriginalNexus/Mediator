@@ -1,8 +1,9 @@
 package com.originalnexus.mediator.adapters;
 
 import android.animation.ValueAnimator;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,8 +87,9 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 		return mSubjects.size();
 	}
 
+	@NonNull
 	@Override
-	public SubjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+	public SubjectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		final SubjectViewHolder svh = new SubjectViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_subject, parent, false));
 		svh.mView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -99,7 +101,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 	}
 
 	@Override
-	public void onBindViewHolder(SubjectViewHolder subjectViewHolder, int i) {
+	public void onBindViewHolder(@NonNull SubjectViewHolder subjectViewHolder, int i) {
 		Subject s = mSubjects.get(i);
 		subjectViewHolder.mNameView.setText(s.name);
 		subjectViewHolder.mGradesView.setText((s.grades.size() > 0) ? GradeCalc.arrayListToString(s.grades) : "");

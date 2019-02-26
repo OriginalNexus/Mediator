@@ -5,7 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -99,7 +99,7 @@ public class NameDialog extends DialogFragment {
 
 				// Open keyboard
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.showSoftInput(editT, InputMethodManager.SHOW_IMPLICIT);
+				if (imm != null) imm.showSoftInput(editT, InputMethodManager.SHOW_IMPLICIT);
 			}
 		});
 

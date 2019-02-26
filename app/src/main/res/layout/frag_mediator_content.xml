@@ -8,7 +8,7 @@
 	android:orientation="vertical"
 	android:padding="16dp">
 
-	<android.support.v7.widget.CardView
+	<androidx.cardview.widget.CardView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
@@ -70,9 +70,9 @@
 
 		</LinearLayout>
 
-	</android.support.v7.widget.CardView>
+	</androidx.cardview.widget.CardView>
 
-	<android.support.v7.widget.CardView
+	<androidx.cardview.widget.CardView
 		android:id="@+id/frag_mediator_average_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -98,8 +98,7 @@
 			<RelativeLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginStart="8dp"
-				android:layout_marginLeft="8dp">
+				android:layout_marginStart="8dp">
 
 				<TextView
 					style="@style/TextAppearance.AppCompat.Headline"
@@ -115,18 +114,16 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="8dp"
-					android:layout_marginLeft="8dp"
 					android:layout_alignBaseline="@id/frag_mediator_average_round"
-					android:layout_toEndOf="@id/frag_mediator_average_round"
-					android:layout_toRightOf="@id/frag_mediator_average_round"/>
+					android:layout_toEndOf="@id/frag_mediator_average_round"/>
 
 			</RelativeLayout>
 
 		</LinearLayout>
 
-	</android.support.v7.widget.CardView>
+	</androidx.cardview.widget.CardView>
 
-	<android.support.v7.widget.CardView
+	<androidx.cardview.widget.CardView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="16dp">
@@ -140,9 +137,7 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="64dp"
-				android:paddingLeft="16dp"
 				android:paddingStart="16dp"
-				android:paddingRight="4dp"
 				android:paddingEnd="4dp"
 				android:orientation="horizontal">
 
@@ -172,7 +167,6 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
-					android:layout_marginLeft="12dp"
 					android:layout_marginStart="12dp"
 					android:gravity="center"
 					android:minWidth="24dp"
@@ -185,7 +179,6 @@
 					android:layout_width="48dp"
 					android:layout_height="48dp"
 					android:layout_gravity="center_vertical"
-					android:layout_marginLeft="12dp"
 					android:layout_marginStart="12dp"
 					android:contentDescription="@string/frag_mediator_add"/>
 
@@ -214,7 +207,6 @@
 					android:layout_width="@dimen/hint_right_column_width"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
-					android:layout_marginLeft="24dp"
 					android:layout_marginStart="24dp"
 					android:text="@string/frag_mediator_table_header_average"
 					android:textAlignment="viewEnd"
@@ -230,6 +222,6 @@
 
 		</LinearLayout>
 
-	</android.support.v7.widget.CardView>
+	</androidx.cardview.widget.CardView>
 
 </LinearLayout>
